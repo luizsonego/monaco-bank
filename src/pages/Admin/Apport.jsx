@@ -3,7 +3,7 @@ import { Form, Input } from "antd";
 import { Button, Toast } from "antd-mobile";
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useApportPut } from "../../hooks/useWallet.query";
+import { useApportPost } from "../../hooks/useWallet.query";
 
 const Apport = () => {
   const navigate = useNavigate();
