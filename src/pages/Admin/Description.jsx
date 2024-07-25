@@ -110,7 +110,7 @@ const Description = () => {
           </List.Item>
         </List>
       )}
-      {profileData?.bank.bank === null ? (
+      {profileData?.bank?.bank === null ? (
         <List
           mode="card"
           header={

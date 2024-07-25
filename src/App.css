@@ -20,12 +20,13 @@ html {
 }
 
 body {
-  background: radial-gradient(
+  background: #081331;
+  /* background: radial-gradient(
     150% 46.24% at 23.47% 8.31%,
     #0e3c21 0%,
     #052a25 48.75%,
     #050505 94.67%
-  );
+  ); */
   background-attachment: fixed;
 }
 
