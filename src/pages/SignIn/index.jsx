@@ -7,7 +7,7 @@ import { background } from "@chakra-ui/react";
 import { useState } from "react";
 import { EyeInvisibleOutline, EyeOutline } from "antd-mobile-icons";
 import { useLoginPost } from "../../hooks/useUser.query";
-import { Toast } from 'antd-mobile'
+import { Toast } from "antd-mobile";
 import { useNavigate } from "react-router-dom";
 
 const { Content } = Layout;
@@ -55,8 +55,6 @@ const SignIn = () => {
   const { handleSubmit, control } = useForm();
   let navigate = useNavigate();
 
-  
-
   const { data, mutate, isLoading } = useMutation({
     mutationFn: useLoginPost,
     onSuccess: (data) => {
@@ -71,10 +69,7 @@ const SignIn = () => {
         content: "Login realizado com sucesso!",
         icon: "success",
       });
-      localStorage.setItem(
-        process.env.REACT_APP_ACCESS_TOKEN,
-        data.data.token
-      );
+      localStorage.setItem(process.env.REACT_APP_ACCESS_TOKEN, data.data.token);
       setTimeout(1000);
       navigate("/");
     },
@@ -111,7 +106,7 @@ const SignIn = () => {
               style={buttonStyle}
               size="xs"
               htmlType="submit"
-              loading={isLoading}
+              loading={!!isLoading}
             >
               Entrar
             </Button>

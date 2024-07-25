@@ -12,13 +12,15 @@ import AdminIndex from "../pages/Admin";
 import CreateUser from "../pages/Admin/Create";
 import ListProfiles from "../pages/Admin/ListProfiles";
 import Description from "../pages/Admin/Description";
+import { isAuthenticated } from "../services/auth";
+import Apport from "../pages/Admin/Apport";
 
 export default function MainRoutes() {
   const { data } = useRoleGet();
   return useRoutes([
     {
       path: "/",
-      element: true ? <Main /> : <Navigate to="/login" />,
+      element: isAuthenticated() ? <Main /> : <Navigate to="/login" />,
       children: [
         {
           element: <Navigate to="/" />,
@@ -42,6 +44,7 @@ export default function MainRoutes() {
             { path: "create-user", element: <CreateUser /> },
             { path: "list-users", element: <ListProfiles /> },
             { path: "description/:id", element: <Description /> },
+            { path: "aporte/:id", element: <Apport /> },
           ],
         },
       ],

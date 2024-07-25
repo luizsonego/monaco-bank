@@ -38,6 +38,27 @@ const getTransactions = async () => {
   }
 };
 
+const postCreateApport = async (value) => {
+  const { id, values } = value;
+  try {
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API}/profile/investiment?id=${id}`,
+      values,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem(
+            process.env.REACT_APP_ACCESS_TOKEN
+          )}`,
+        },
+      }
+    );
+    return data;
+  } catch (error) {
+    console.log("error: ", error);
+  }
+};
+
 export function useWalletGet() {
   return useQuery({
     queryKey: ["wallet"],
@@ -50,4 +71,8 @@ export function useTransactionsGet() {
     queryKey: ["transactions"],
     queryFn: () => getTransactions(),
   });
+}
+
+export function useApportPut(data) {
+  return postCreateApport(data);
 }

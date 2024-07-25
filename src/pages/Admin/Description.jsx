@@ -39,6 +39,9 @@ const Description = () => {
           }}
         />
       </Card>
+      <Button type="text" onClick={() => handleNavigate(`/admin/aporte/${id}`)}>
+        Realizar aporte
+      </Button>
       <Divider />
 
       <List
