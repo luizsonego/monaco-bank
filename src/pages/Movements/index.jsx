@@ -3,7 +3,7 @@ import HeaderProfile from "../../components/layout/HeaderProfile";
 import { useTransactionsGet } from "../../hooks/useWallet.query";
 import { Card } from "antd";
 import { date_format } from "../../Helpers/dateFormat";
-import { type_format } from "../../Helpers/typeFormat";
+import { type_format, type_format_color } from "../../Helpers/typeFormat";
 import { formatCurrency } from "../../Helpers/moneyFormat";
 
 const Movements = () => {
@@ -27,7 +27,12 @@ const Movements = () => {
             <span style={{ fontSize: 18, color: "#555555" }}>
               {type_format(transaction.type_transaction)}
             </span>
-            <span style={{ fontSize: 20, color: "#555555" }}>
+            <span
+              style={{
+                fontSize: 20,
+                color: type_format_color(transaction.type_transaction),
+              }}
+            >
               {formatCurrency(transaction.amount_money, "USD")}
             </span>
           </div>

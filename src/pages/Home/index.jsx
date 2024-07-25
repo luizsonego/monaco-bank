@@ -6,7 +6,7 @@ import { useTransactionsGet, useWalletGet } from "../../hooks/useWallet.query";
 import Title from "antd/es/typography/Title";
 import { Card, Divider, Statistic } from "antd";
 import { formatCurrency } from "../../Helpers/moneyFormat";
-import { type_format } from "../../Helpers/typeFormat";
+import { type_format, type_format_color } from "../../Helpers/typeFormat";
 import { date_format } from "../../Helpers/dateFormat";
 import HeaderProfile from "../../components/layout/HeaderProfile";
 
