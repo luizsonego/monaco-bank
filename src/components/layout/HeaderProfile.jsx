@@ -19,7 +19,7 @@ const HeaderProfile = ({ color }) => {
       <List mode="card" style={{ margin: 0 }}>
         <List.Item prefix={<Avatar src="" />}>
           <Title level={4} style={{ color: color }}>
-            {profileData?.profile.name}
+            {profileData?.profile?.name}
           </Title>
         </List.Item>
       </List>
