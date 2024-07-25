@@ -1,24 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import { QueryClientProvider } from "@tanstack/react-query";
+import "./App.css";
+import queryClient from "./clientProvider/clientProvider";
+import { SafeArea } from "antd-mobile";
+import MainRoutes from "./routes";
+import { ChakraProvider } from "@chakra-ui/react";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <SafeArea position="top" />
+      <ChakraProvider>
+        <MainRoutes />
+      </ChakraProvider>
+      <SafeArea position="bottom" />
+    </QueryClientProvider>
   );
 }
 

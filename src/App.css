@@ -1,38 +1,60 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  --adm-color-background: 90deg, rgba(76, 175, 80, 1) 0%,
+    rgba(49, 220, 255, 1) 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+:root {
+  margin: 0;
+  padding: 0;
+  --main-bg-color: brown;
+  --main-gradient-color: 90deg, rgba(76, 175, 80, 1) 0%,
+    rgba(49, 220, 255, 1) 100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+*,
+:root,
+html {
+  font-family: "Poppins", sans-serif;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+body {
+  background: radial-gradient(
+    150% 46.24% at 23.47% 8.31%,
+    #0e3c21 0%,
+    #052a25 48.75%,
+    #050505 94.67%
+  );
+  background-attachment: fixed;
 }
 
-.App-link {
-  color: #61dafb;
+.layout-app {
+  background: #050505;
+  height: "100vh";
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.layout-login {
+  border: 0 transparent;
+  border-radius: 10px;
+  background-color: #081331;
+  /* background: -moz-linear-gradient(140deg, #4c4eaf 30% 31%) 0%,
+    rgb(0, 54, 65) 100%;
+  background: -webkit-linear-gradient(
+    140deg,
+    rgb(76, 78, 175) 0%,
+    rgb(0, 54, 65) 100%
+  );
+  background: -o-linear-gradient(
+    140deg,
+    rgb(76, 78, 175) 0%,
+    rgb(0, 54, 65) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#31DCFF', endColorstr='#4c4eaf', GradientType=0);
+  background: -ms-linear-gradient(
+    140deg,
+    rgb(76, 78, 175) 0%,
+    rgb(0, 54, 65) 100%
+  );
+  background: linear-gradient(140deg, rgb(76, 78, 175) 0%, rgb(0, 54, 65) 100%); */
 }
