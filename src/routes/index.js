@@ -14,6 +14,7 @@ import ListProfiles from "../pages/Admin/ListProfiles";
 import Description from "../pages/Admin/Description";
 import { isAuthenticated } from "../services/auth";
 import Apport from "../pages/Admin/Apport";
+import Withdraw from "../pages/Admin/Withdraw";
 
 export default function MainRoutes() {
   const { data } = useRoleGet();
@@ -45,6 +46,7 @@ export default function MainRoutes() {
             { path: "list-users", element: <ListProfiles /> },
             { path: "description/:id", element: <Description /> },
             { path: "aporte/:id", element: <Apport /> },
+            { path: "saque/:id", element: <Withdraw /> },
           ],
         },
       ],
