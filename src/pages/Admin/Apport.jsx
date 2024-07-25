@@ -12,7 +12,7 @@ const Apport = () => {
   const [form] = Form.useForm();
 
   const { mutate } = useMutation({
-    mutationFn: useApportPut,
+    mutationFn: useApportPost,
     onSuccess: (data) => {
       Toast.show({
         content: data.message,

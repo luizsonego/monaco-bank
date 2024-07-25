@@ -42,7 +42,7 @@ const postCreateApport = async (value) => {
   const { id, values } = value;
   try {
     const { data } = await axios.post(
-      `${process.env.REACT_APP_API}/profile/investiment?id=${id}`,
+      `${process.env.REACT_APP_API}/v1/profile/investiment?id=${id}`,
       values,
       {
         headers: {
@@ -73,6 +73,6 @@ export function useTransactionsGet() {
   });
 }
 
-export function useApportPut(data) {
+export function useApportPost(data) {
   return postCreateApport(data);
 }
