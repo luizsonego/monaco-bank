@@ -33,7 +33,7 @@ const Description = () => {
       <Card bordered={false} loading={isLoading} style={{ marginTop: 20 }}>
         <Statistic
           title="Valor na carteira"
-          value={formatCurrency(profileData?.wallet?.amount, "BRL")}
+          value={formatCurrency(profileData?.wallet?.amount, "USD")}
           valueStyle={{
             color: "#3f8600",
           }}
