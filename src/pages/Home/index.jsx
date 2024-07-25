@@ -6,7 +6,7 @@ import { useTransactionsGet, useWalletGet } from "../../hooks/useWallet.query";
 import Title from "antd/es/typography/Title";
 import { Card, Divider, Statistic } from "antd";
 import { formatCurrency } from "../../Helpers/moneyFormat";
-import { type_format } from "../../Helpers/typeFormat";
+import { type_format, type_format_color } from "../../Helpers/typeFormat";
 import { date_format } from "../../Helpers/dateFormat";
 import HeaderProfile from "../../components/layout/HeaderProfile";
 
@@ -52,7 +52,12 @@ const Home = () => {
               {date_format(transaction.date)}
             </span>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <span style={{ fontSize: 18, color: "#555555" }}>
+              <span
+                style={{
+                  fontSize: 18,
+                  color: type_format_color(transaction.type_transaction),
+                }}
+              >
                 {type_format(transaction.type_transaction)}
               </span>
               <span style={{ fontSize: 20, color: "#555555" }}>
