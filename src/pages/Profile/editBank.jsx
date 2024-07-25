@@ -1,4 +1,4 @@
-import { Form, Input } from "antd";
+import { Divider, Form, Input } from "antd";
 import React from "react";
 import { useProfileGet, useProfilePut } from "../../hooks/useProfile.query";
 import { Button, Toast } from "antd-mobile";
@@ -46,6 +46,9 @@ const EditBank = () => {
           bank_account_type: profileData?.bank?.bank_account_type,
           bank_account_number: profileData?.bank?.bank_account_number,
           bank_pix: profileData?.bank?.bank_pix,
+          bank_iban: profileData?.bank?.bank_iban,
+          bank_swift: profileData?.bank?.bank_swift,
+          bank_office_phone: profileData?.bank?.bank_office_phone,
         }}
       >
         <Form.Item name="bank" label="Banco">
@@ -60,6 +63,16 @@ const EditBank = () => {
         <Form.Item name="bank_account_number" label="Numero da conta">
           <Input />
         </Form.Item>
+        <Form.Item name="bank_iban" label="Iban">
+          <Input />
+        </Form.Item>
+        <Form.Item name="bank_swift" label="Swift">
+          <Input />
+        </Form.Item>
+        <Form.Item name="bank_office_phone" label="Office">
+          <Input />
+        </Form.Item>
+        <Divider />
         <Form.Item name="bank_pix" label="PIX">
           <Input />
         </Form.Item>

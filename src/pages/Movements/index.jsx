@@ -28,9 +28,12 @@ const Movements = () => {
               {type_format(transaction.type_transaction)}
             </span>
             <span style={{ fontSize: 20, color: "#555555" }}>
-              {formatCurrency(transaction.amount_money, "BRL")}
+              {formatCurrency(transaction.amount_money, "USD")}
             </span>
           </div>
+          <span style={{ color: "#797777", fontSize: 12 }}>
+            {date_format(transaction.description)}
+          </span>
         </Card>
       ))}
     </div>

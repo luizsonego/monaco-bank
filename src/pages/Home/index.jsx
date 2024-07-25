@@ -33,7 +33,7 @@ const Home = () => {
       <Card bordered={false} loading={loadingWallet}>
         <Statistic
           title="Valor na carteira"
-          value={formatCurrency(walletData?.amount, "BRL")}
+          value={formatCurrency(walletData?.amount, "USD")}
           valueStyle={{
             color: "#3f8600",
           }}
@@ -56,7 +56,7 @@ const Home = () => {
                 {type_format(transaction.type_transaction)}
               </span>
               <span style={{ fontSize: 20, color: "#555555" }}>
-                {formatCurrency(transaction.amount_money, "BRL")}
+                {formatCurrency(transaction.amount_money, "USD")}
               </span>
             </div>
           </Card>
