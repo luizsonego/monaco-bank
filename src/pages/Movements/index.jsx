@@ -32,7 +32,7 @@ const Movements = () => {
             </span>
           </div>
           <span style={{ color: "#797777", fontSize: 12 }}>
-            {date_format(transaction.description)}
+            {transaction.description}
           </span>
         </Card>
       ))}
