@@ -58,6 +58,26 @@ const postCreateApport = async (value) => {
     console.log("error: ", error);
   }
 };
+const postCreateWithdraw = async (value) => {
+  const { id, values } = value;
+  try {
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API}/v1/profile/withdraw?id=${id}`,
+      values,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem(
+            process.env.REACT_APP_ACCESS_TOKEN
+          )}`,
+        },
+      }
+    );
+    return data;
+  } catch (error) {
+    console.log("error: ", error);
+  }
+};
 
 export function useWalletGet() {
   return useQuery({
@@ -75,4 +95,7 @@ export function useTransactionsGet() {
 
 export function useApportPost(data) {
   return postCreateApport(data);
+}
+export function useWithdrawPost(data) {
+  return postCreateWithdraw(data);
 }

@@ -153,9 +153,9 @@ const ProfileIndex = () => {
           </List.Item>
           <List.Item title="Pix">{profileData?.bank?.bank_pix}</List.Item>
 
-          <List.Item title="Pix">{profileData?.bank?.bank_iban}</List.Item>
-          <List.Item title="Pix">{profileData?.bank?.bank_swift}</List.Item>
-          <List.Item title="Pix">
+          <List.Item title="Iban">{profileData?.bank?.bank_iban}</List.Item>
+          <List.Item title="Swift">{profileData?.bank?.bank_swift}</List.Item>
+          <List.Item title="Office">
             {profileData?.bank?.bank_office_phone}
           </List.Item>
         </List>

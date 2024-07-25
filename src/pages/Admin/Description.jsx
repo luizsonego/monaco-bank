@@ -20,7 +20,7 @@ const Description = () => {
     <div>
       <Flex spacing="4">
         <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
-          <Avatar name="Segun Adebayo" src="" />
+          <Avatar name="" src="" />
 
           <Box>
             <Heading size="sm">{profileData?.profile.name}</Heading>
@@ -45,6 +45,13 @@ const Description = () => {
         onClick={() => handleNavigate(`/admin/aporte/${id}`)}
       >
         Realizar aporte
+      </Button>
+      <Button
+        type="dashed"
+        style={{ margin: "10px 0", display: "block", width: "100%" }}
+        onClick={() => handleNavigate(`/admin/saque/${id}`)}
+      >
+        Realizar saque
       </Button>
       <Divider />
 
