@@ -39,7 +39,11 @@ const Description = () => {
           }}
         />
       </Card>
-      <Button type="text" onClick={() => handleNavigate(`/admin/aporte/${id}`)}>
+      <Button
+        type="dashed"
+        style={{ margin: "10px 0" }}
+        onClick={() => handleNavigate(`/admin/aporte/${id}`)}
+      >
         Realizar aporte
       </Button>
       <Divider />
