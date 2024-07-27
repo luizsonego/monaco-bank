@@ -1,14 +1,15 @@
-import React, { useRef } from "react";
-import { Mutation, useMutation } from "@tanstack/react-query";
-import { Button, Form, Input, Layout } from "antd";
-import { Controller, useForm } from "react-hook-form";
+import { Button, Input, Layout, notification } from "antd";
+import React from "react";
 import logo from "../../assets/monaco_bank_logo.png";
-import { background } from "@chakra-ui/react";
-import { useState } from "react";
-import { EyeInvisibleOutline, EyeOutline } from "antd-mobile-icons";
-import { useLoginPost } from "../../hooks/useUser.query";
-import { Toast } from "antd-mobile";
-import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { Toast } from "@chakra-ui/react";
+import {
+  useForgotPost,
+  useLoginPost,
+  useResetPost,
+} from "../../hooks/useUser.query";
+import { useNavigate, useParams } from "react-router-dom";
+import { Controller, useForm } from "react-hook-form";
 
 const { Content } = Layout;
 
@@ -20,7 +21,6 @@ const contentStyle = {
   flexDirection: "column",
   margin: "0 auto",
 };
-
 const layoutStyle = {
   borderRadius: 8,
   overflow: "hidden",
@@ -51,31 +51,32 @@ const buttonStyle = {
   },
 };
 
-const SignIn = () => {
+const Reset = () => {
+  let { token } = useParams();
+  const [api, contextHolder] = notification.useNotification();
   const { handleSubmit, control } = useForm();
   let navigate = useNavigate();
 
   const handleNavigate = (path) => {
     navigate(path);
   };
-
+  console.log(token);
   const { data, mutate, isLoading } = useMutation({
-    mutationFn: useLoginPost,
+    mutationFn: useResetPost,
     onSuccess: (data) => {
       if (data.status === 400 || data.status === 401) {
-        Toast.show({
-          content: data.message,
-          icon: "fail",
+        api.error({
+          message: data.message,
+          placement: "top",
         });
         return;
       }
-      Toast.show({
-        content: "Login realizado com sucesso!",
-        icon: "success",
+      api.success({
+        message: "Solicitação enviada com sucesso!",
+        placement: "top",
       });
-      localStorage.setItem(process.env.REACT_APP_ACCESS_TOKEN, data.data.token);
       setTimeout(1000);
-      navigate("/");
+      navigate("/login");
     },
     onError: (error) => {
       console.log("error: ", error);
@@ -83,30 +84,35 @@ const SignIn = () => {
   });
 
   const onSubmit = (data) => {
-    mutate(data);
+    const values = {
+      token: token,
+      pass: data,
+    };
+    mutate(values);
   };
 
   return (
     <Layout style={layoutStyle} className={`layout-login`}>
+      {contextHolder}
       <Content style={contentStyle}>
         <div className="logo">
-          <img src={logo} alt="" style={{ height: "290px" }} />
+          <img
+            src={logo}
+            alt=""
+            style={{ height: "180px", marginBottom: 30 }}
+          />
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div style={formStyle}>
             <Controller
-              name="username"
-              control={control}
-              render={({ field }) => <Input placeholder="Usuário" {...field} />}
-            />
-            <Controller
               name="password"
               control={control}
               render={({ field }) => (
-                <Input.Password placeholder="Senha" {...field} />
+                <Input.Password placeholder="Nova senha" {...field} />
               )}
             />
             <Button
+              type="primary"
               style={buttonStyle}
               size="xs"
               htmlType="submit"
@@ -116,16 +122,9 @@ const SignIn = () => {
             </Button>
           </div>
         </form>
-        <Button
-          type="link"
-          style={{ margin: "20px 0 ", color: "#0094a0" }}
-          size="xs"
-          onClick={() => handleNavigate("/recuperar-senha")}
-        >
-          Esqueci minhas senha
-        </Button>
       </Content>
     </Layout>
   );
 };
-export default SignIn;
+
+export default Reset;

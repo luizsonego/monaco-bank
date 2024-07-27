@@ -15,6 +15,8 @@ import Description from "../pages/Admin/Description";
 import { isAuthenticated } from "../services/auth";
 import Apport from "../pages/Admin/Apport";
 import Withdraw from "../pages/Admin/Withdraw";
+import Forgot from "../pages/Forgot";
+import Reset from "../pages/reset";
 
 export default function MainRoutes() {
   const { data } = useRoleGet();
@@ -55,6 +57,8 @@ export default function MainRoutes() {
       path: "/login",
       element: <SignIn />,
     },
+    { path: "/recuperar-senha", element: <Forgot /> },
+    { path: "/resetar-senha/:token", element: <Reset /> },
     {
       path: "*",
       element: <h1>404</h1>,
