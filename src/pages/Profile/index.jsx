@@ -160,6 +160,14 @@ const ProfileIndex = () => {
           </List.Item>
         </List>
       )}
+
+      <Divider />
+
+      <List header="">
+        <List.Item onClick={() => handleNavigate("alterar-senha")}>
+          Alterar senha
+        </List.Item>
+      </List>
     </div>
   );
 };

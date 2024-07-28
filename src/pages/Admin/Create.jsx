@@ -1,4 +1,4 @@
-import { Form, Input } from "antd";
+import { Form, Input, notification } from "antd";
 import React from "react";
 import { Button, Toast } from "antd-mobile";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -6,15 +6,17 @@ import { useNavigate } from "react-router-dom";
 import { useCreateUserPost } from "../../hooks/useUser.query";
 
 const CreateUser = () => {
+  const [api, contextHolder] = notification.useNotification();
+
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [form] = Form.useForm();
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: useCreateUserPost,
     onSuccess: (data) => {
-      Toast.show({
-        content: data.message,
+      api.info({
+        message: data.message,
       });
       if (data.status === 201) {
         navigate("/admin");
@@ -28,6 +30,7 @@ const CreateUser = () => {
 
   return (
     <div>
+      {contextHolder}
       <Form
         form={form}
         layout="vertical"
@@ -49,7 +52,7 @@ const CreateUser = () => {
 
         <Form.Item>
           <Button
-            // loading={!!isLoading}
+            loading={!!isPending}
             style={{ width: "100%", marginRight: 0 }}
             type="submit"
             color="primary"

@@ -59,3 +59,25 @@ body {
   );
   background: linear-gradient(140deg, rgb(76, 78, 175) 0%, rgb(0, 54, 65) 100%); */
 }
+
+.gif-container {
+  position: relative;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.fade-out {
+  animation: fadeOut 1s forwards;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

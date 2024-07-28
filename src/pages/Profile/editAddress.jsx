@@ -1,4 +1,4 @@
-import { Form, Input } from "antd";
+import { Form, Input, message, notification } from "antd";
 import React from "react";
 import { useProfileGet, useProfilePut } from "../../hooks/useProfile.query";
 import { Button, Toast } from "antd-mobile";
@@ -6,17 +6,19 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 const EditAddress = () => {
+  const [api, contextHolder] = notification.useNotification();
+
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [form] = Form.useForm();
 
   const { data: profileData, isLoading: loadingProfile } = useProfileGet();
 
-  const { mutate } = useMutation({
+  const { mutate, isLoading } = useMutation({
     mutationFn: useProfilePut,
     onSuccess: (data) => {
-      Toast.show({
-        content: data.message,
+      api.success({
+        message: data.message,
       });
       queryClient.invalidateQueries("profile");
       if (data.status === 201) {
@@ -35,6 +37,7 @@ const EditAddress = () => {
 
   return (
     <div>
+      {contextHolder}
       <Form
         form={form}
         layout="vertical"
@@ -73,7 +76,7 @@ const EditAddress = () => {
         </Form.Item>
         <Form.Item>
           <Button
-            // loading={!!isLoading}
+            loading={!!isLoading}
             style={{ width: "100%", marginRight: 0 }}
             type="submit"
             color="primary"

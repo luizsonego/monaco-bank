@@ -1,4 +1,4 @@
-import { Divider, Form, Input } from "antd";
+import { Divider, Form, Input, notification } from "antd";
 import React from "react";
 import { useProfileGet, useProfilePut } from "../../hooks/useProfile.query";
 import { Button, Toast } from "antd-mobile";
@@ -6,6 +6,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 const EditBank = () => {
+  const [api, contextHolder] = notification.useNotification();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [form] = Form.useForm();
@@ -15,8 +16,8 @@ const EditBank = () => {
   const { mutate } = useMutation({
     mutationFn: useProfilePut,
     onSuccess: (data) => {
-      Toast.show({
-        content: data.message,
+      api.success({
+        message: data.message,
       });
       queryClient.invalidateQueries("profile");
       if (data.status === 201) {
@@ -35,6 +36,7 @@ const EditBank = () => {
 
   return (
     <div>
+      {contextHolder}
       <Form
         form={form}
         layout="vertical"

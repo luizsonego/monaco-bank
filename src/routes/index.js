@@ -17,9 +17,20 @@ import Apport from "../pages/Admin/Apport";
 import Withdraw from "../pages/Admin/Withdraw";
 import Forgot from "../pages/Forgot";
 import Reset from "../pages/reset";
+import { useState } from "react";
+import VideoComponent from "../components/VideoComponent";
+import GifComponent from "../components/GifComponent";
+import ChangePass from "../pages/Profile/ChangePass";
 
 export default function MainRoutes() {
+  const [gifEnded, setGifEnded] = useState(false);
+
   const { data } = useRoleGet();
+
+  const handleGifEnd = () => {
+    setGifEnded(true);
+  };
+
   return useRoutes([
     {
       path: "/",
@@ -37,6 +48,7 @@ export default function MainRoutes() {
             { path: "edit-profile", element: <EditProfile /> },
             { path: "edit-address", element: <EditAddress /> },
             { path: "edit-bank", element: <EditBank /> },
+            { path: "alterar-senha", element: <ChangePass /> },
           ],
         },
         data === 99 && {
@@ -55,8 +67,14 @@ export default function MainRoutes() {
     },
     {
       path: "/login",
-      element: <SignIn />,
+      element: !gifEnded ? (
+        <GifComponent onGifEnd={handleGifEnd} />
+      ) : (
+        <SignIn />
+      ),
     },
+    // { path: "/login", element: <GifComponent onGifEnd={handleGifEnd} /> },
+    // { path: "/login", element: <SignIn /> },
     { path: "/recuperar-senha", element: <Forgot /> },
     { path: "/resetar-senha/:token", element: <Reset /> },
     {

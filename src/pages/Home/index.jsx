@@ -1,19 +1,25 @@
 import { NavBar, Space, Toast } from "antd-mobile";
-import React from "react";
+import React, { useState } from "react";
 import Header from "../../components/layout/Header";
 import { useTransactionsGet, useWalletGet } from "../../hooks/useWallet.query";
 // import { Card, CardBody } from "@chakra-ui/react";
 import Title from "antd/es/typography/Title";
-import { Card, Divider, Statistic } from "antd";
+import { Card, Divider, Flex, Statistic } from "antd";
 import { formatCurrency } from "../../Helpers/moneyFormat";
 import { type_format, type_format_color } from "../../Helpers/typeFormat";
 import { date_format } from "../../Helpers/dateFormat";
 import HeaderProfile from "../../components/layout/HeaderProfile";
+import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
 
 const Home = () => {
+  const [showAmounts, setShowAmounts] = useState(true);
   const { data: walletData, isLoading: loadingWallet } = useWalletGet();
   const { data: transactionsData, isLoading: loadingTransactions } =
     useTransactionsGet();
+
+  const handleShowAmount = () => {
+    setShowAmounts(!showAmounts);
+  };
 
   return (
     <>
@@ -32,8 +38,19 @@ const Home = () => {
 
       <Card bordered={false} loading={loadingWallet}>
         <Statistic
-          title="Valor na carteira"
-          value={formatCurrency(walletData?.amount, "USD")}
+          title={
+            <Flex justify={"space-between"}>
+              <div>Valor na carteira</div>
+              <div onClick={handleShowAmount}>
+                {showAmounts ? <EyeInvisibleOutlined /> : <EyeOutlined />}
+              </div>
+            </Flex>
+          }
+          value={
+            showAmounts
+              ? formatCurrency(walletData?.amount, "USD")
+              : "*********"
+          }
           valueStyle={{
             color: "#3f8600",
           }}
@@ -52,16 +69,19 @@ const Home = () => {
               {date_format(transaction.date)}
             </span>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <span style={{ fontSize: 18, color: "#555555" }}>
+              <span style={{ fontSize: 16, fontWeight: 500, color: "#555555" }}>
                 {type_format(transaction.type_transaction)}
               </span>
               <span
                 style={{
-                  fontSize: 20,
+                  fontSize: 18,
+                  fontWeight: 600,
                   color: type_format_color(transaction.type_transaction),
                 }}
               >
-                {formatCurrency(transaction.amount_money, "USD")}
+                {showAmounts
+                  ? formatCurrency(transaction.amount_money, "USD")
+                  : "*********"}
               </span>
             </div>
           </Card>

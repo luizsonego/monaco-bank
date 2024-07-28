@@ -72,6 +72,25 @@ const postReset = async (user) => {
     console.log("error: ", error);
   }
 };
+const postUpdatePass = async (user) => {
+  try {
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API}/site/update-pass`,
+      user,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem(
+            process.env.REACT_APP_ACCESS_TOKEN
+          )}`,
+        },
+      }
+    );
+    return data;
+  } catch (error) {
+    console.log("error: ", error);
+  }
+};
 
 const getRole = async () => {
   try {
@@ -88,9 +107,27 @@ const getRole = async () => {
     console.log("error: ", error);
   }
 };
+const getUser = async () => {
+  try {
+    const { data } = await axios.get(`${process.env.REACT_APP_API}/user`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem(
+          process.env.REACT_APP_ACCESS_TOKEN
+        )}`,
+      },
+    });
+    return data.data;
+  } catch (error) {
+    console.log("error: ", error);
+  }
+};
 
 export function useLoginPost(data) {
   return postLogin(data);
+}
+export function usePassPost(data) {
+  return postUpdatePass(data);
 }
 export function useForgotPost(data) {
   return postForgot(data);
@@ -106,5 +143,11 @@ export function useRoleGet() {
   return useQuery({
     queryKey: ["role"],
     queryFn: () => getRole(),
+  });
+}
+export function useUserGet() {
+  return useQuery({
+    queryKey: ["user"],
+    queryFn: () => getUser(),
   });
 }
