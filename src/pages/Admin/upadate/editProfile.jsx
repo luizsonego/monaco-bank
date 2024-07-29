@@ -1,18 +1,25 @@
 import { Form, Input, notification } from "antd";
 import React from "react";
-import { useProfileGet, useProfilePut } from "../../hooks/useProfile.query";
+
 import { Button, Toast } from "antd-mobile";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  useAdminProfileGet,
+  useProfilePut,
+} from "../../../hooks/useProfile.query";
 
-const EditProfile = () => {
+const AdminEditProfile = () => {
+  let { id } = useParams();
   const [api, contextHolder] = notification.useNotification();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [form] = Form.useForm();
 
-  const { data: profileData, isLoading: loadingProfile } = useProfileGet();
+  const { data: profileData, isLoading: loadingProfile } =
+    useAdminProfileGet(id);
 
+  console.log(profileData?.profile?.name);
   const { mutate } = useMutation({
     mutationFn: useProfilePut,
     onSuccess: (data) => {
@@ -21,7 +28,7 @@ const EditProfile = () => {
       });
       queryClient.invalidateQueries("profile");
       if (data.status === 201) {
-        navigate("/profile");
+        navigate(-1);
       }
     },
   });
@@ -34,20 +41,22 @@ const EditProfile = () => {
     mutate(data);
   };
 
+  if (loadingProfile) {
+    return "carregando...";
+  }
   return (
     <div>
       {contextHolder}
-      {}
       <Form
         form={form}
         layout="vertical"
         name="create-user"
         onFinish={onFinish}
         initialValues={{
-          name: profileData?.profile.name,
-          email: profileData?.profile.email,
-          phone: profileData?.profile.phone,
-          whatsapp: profileData?.profile.whatsapp,
+          name: profileData?.profile?.name,
+          email: profileData?.profile?.email,
+          phone: profileData?.profile?.phone,
+          whatsapp: profileData?.profile?.whatsapp,
         }}
       >
         <Form.Item name="name" label="Nome">
@@ -78,4 +87,4 @@ const EditProfile = () => {
   );
 };
 
-export default EditProfile;
+export default AdminEditProfile;

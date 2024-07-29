@@ -21,6 +21,9 @@ import { useState } from "react";
 import VideoComponent from "../components/VideoComponent";
 import GifComponent from "../components/GifComponent";
 import ChangePass from "../pages/Profile/ChangePass";
+import AdminEditProfile from "../pages/Admin/upadate/editProfile";
+import AdminEditAddress from "../pages/Admin/upadate/editAddress";
+import AdminEditBank from "../pages/Admin/upadate/editBank";
 
 export default function MainRoutes() {
   const [gifEnded, setGifEnded] = useState(false);
@@ -61,6 +64,9 @@ export default function MainRoutes() {
             { path: "description/:id", element: <Description /> },
             { path: "aporte/:id", element: <Apport /> },
             { path: "saque/:id", element: <Withdraw /> },
+            { path: "edit-profile/:id", element: <AdminEditProfile /> },
+            { path: "edit-address/:id", element: <AdminEditAddress /> },
+            { path: "edit-bank/:id", element: <AdminEditBank /> },
           ],
         },
       ],

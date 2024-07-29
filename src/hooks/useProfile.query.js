@@ -19,6 +19,24 @@ const getProfile = async () => {
     console.log("error: ", error);
   }
 };
+const getAdminProfile = async (id) => {
+  try {
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_API}/v1/profile/admin-user?id=${id}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem(
+            process.env.REACT_APP_ACCESS_TOKEN
+          )}`,
+        },
+      }
+    );
+    return data.data;
+  } catch (error) {
+    console.log("error: ", error);
+  }
+};
 
 const getAllProfiles = async () => {
   try {
@@ -83,6 +101,12 @@ export function useProfileGet() {
   return useQuery({
     queryKey: ["profile"],
     queryFn: () => getProfile(),
+  });
+}
+export function useAdminProfileGet(id) {
+  return useQuery({
+    queryKey: ["profile-admin"],
+    queryFn: () => getAdminProfile(id),
   });
 }
 

@@ -62,7 +62,7 @@ const Description = () => {
             <Text>Dados Pessoais</Text>
             <Button
               type="text"
-              onClick={() => handleNavigate("/profile/edit-profile")}
+              onClick={() => handleNavigate(`/admin/edit-profile/${id}`)}
             >
               <EditSOutline />
             </Button>
@@ -86,7 +86,7 @@ const Description = () => {
               <Text>Endereço</Text>
               <Button
                 type="text"
-                onClick={() => handleNavigate("/profile/edit-address")}
+                onClick={() => handleNavigate(`/admin/edit-address/${id}`)}
               >
                 <EditSOutline />
               </Button>
@@ -102,7 +102,7 @@ const Description = () => {
               display: "block",
             }}
           >
-            <div onClick={() => handleNavigate("/profile/edit-address")}>
+            <div onClick={() => handleNavigate(`/admin/edit-address/${id}`)}>
               Adicionar
             </div>
           </Button>
@@ -132,7 +132,7 @@ const Description = () => {
               <Text>Dados Bancarios</Text>
               <Button
                 type="text"
-                onClick={() => handleNavigate("/profile/edit-bank")}
+                onClick={() => handleNavigate(`/admin/edit-bank/${id}`)}
               >
                 <EditSOutline />
               </Button>
@@ -147,7 +147,7 @@ const Description = () => {
               textAlign: "center",
               display: "block",
             }}
-            onClick={() => handleNavigate("/profile/edit-bank")}
+            onClick={() => handleNavigate(`/admin/edit-bank/${id}`)}
           >
             Adicionar
           </Button>
@@ -160,7 +160,7 @@ const Description = () => {
               <Text>Dados Bancarios</Text>
               <Button
                 type="text"
-                onClick={() => handleNavigate("/profile/edit-bank")}
+                onClick={() => handleNavigate(`/admin/edit-bank/${id}`)}
               >
                 <EditSOutline />
               </Button>
