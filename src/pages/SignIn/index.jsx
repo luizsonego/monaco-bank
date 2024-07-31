@@ -122,7 +122,7 @@ const SignIn = () => {
           size="xs"
           onClick={() => handleNavigate("/recuperar-senha")}
         >
-          Esqueci minhas senha
+          Forgot password
         </Button>
       </Content>
     </Layout>
