@@ -11,3 +11,9 @@ export const formatCurrency = (amount = 0, currency = "USD") => {
 
   return formattedAmount;
 };
+
+export const removeCurrencyFormat = (amount) => {
+  const formattedAmount = amount.replace(",", "");
+  const formattedAmount2 = formattedAmount.replace("$ ", "");
+  return formattedAmount2;
+};

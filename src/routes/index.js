@@ -18,12 +18,13 @@ import Withdraw from "../pages/Admin/Withdraw";
 import Forgot from "../pages/Forgot";
 import Reset from "../pages/reset";
 import { useState } from "react";
-import VideoComponent from "../components/VideoComponent";
 import GifComponent from "../components/GifComponent";
 import ChangePass from "../pages/Profile/ChangePass";
 import AdminEditProfile from "../pages/Admin/upadate/editProfile";
 import AdminEditAddress from "../pages/Admin/upadate/editAddress";
 import AdminEditBank from "../pages/Admin/upadate/editBank";
+import Lancamentos from "../pages/Admin/Lancamentos";
+import Lancamento from "../pages/Admin/Lancamento";
 
 export default function MainRoutes() {
   const [gifEnded, setGifEnded] = useState(false);
@@ -67,6 +68,8 @@ export default function MainRoutes() {
             { path: "edit-profile/:id", element: <AdminEditProfile /> },
             { path: "edit-address/:id", element: <AdminEditAddress /> },
             { path: "edit-bank/:id", element: <AdminEditBank /> },
+            { path: "lancamentos/:id", element: <Lancamentos /> },
+            { path: "lancamento/:transactionid", element: <Lancamento /> },
           ],
         },
       ],

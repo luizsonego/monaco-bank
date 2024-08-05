@@ -53,6 +53,13 @@ const Description = () => {
       >
         Realizar saque
       </Button>
+      <Button
+        type="dashed"
+        style={{ margin: "10px 0", display: "block", width: "100%" }}
+        onClick={() => handleNavigate(`/admin/lancamentos/${id}`)}
+      >
+        Lançamentos
+      </Button>
       <Divider />
 
       <List
