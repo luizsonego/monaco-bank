@@ -1,7 +1,9 @@
-import { Avatar, List } from "antd-mobile";
+import { Avatar, List, Switch } from "antd-mobile";
 import Title from "antd/es/typography/Title";
 import React from "react";
 import { useProfileGet } from "../../hooks/useProfile.query";
+import { Flex } from "antd";
+import { MessageOutline, QuestionCircleOutline } from "antd-mobile-icons";
 
 const HeaderProfile = ({ color }) => {
   const { data: profileData, isLoading: loadingProfile } = useProfileGet();
@@ -14,13 +16,27 @@ const HeaderProfile = ({ color }) => {
         width: "100%",
         zIndex: 100,
         height: 75,
+        marginTop: 30,
+        marginBottom: 30,
       }}
     >
       <List mode="card" style={{ margin: 0 }}>
-        <List.Item prefix={<Avatar src="" />}>
-          <Title level={4} style={{ color: color }}>
-            {profileData?.profile?.name}
-          </Title>
+        <List.Item
+          prefix={
+            <Avatar
+              src=""
+              style={{ "--size": "60px", "--border-radius": "50%" }}
+            />
+          }
+          title="Bem vindo"
+          extra={
+            <Flex gap={8}>
+              <QuestionCircleOutline fontSize={22} />
+              <MessageOutline fontSize={22} />
+            </Flex>
+          }
+        >
+          {profileData?.profile?.name}
         </List.Item>
       </List>
     </div>

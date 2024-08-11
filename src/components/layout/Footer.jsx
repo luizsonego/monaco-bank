@@ -8,7 +8,7 @@ import {
   AiOutlineUser,
   AiOutlineLogout,
 } from "react-icons/ai";
-import { position } from "@chakra-ui/react";
+import { background, position } from "@chakra-ui/react";
 import {
   Route,
   Switch,
@@ -26,6 +26,7 @@ const footerStyle = {
   position: "fixed",
   width: "100%",
   bottom: 0,
+  background: "#0c0c0c",
 };
 
 const FooterComponent = ({ children }) => {

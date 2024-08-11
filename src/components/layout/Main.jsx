@@ -21,7 +21,7 @@ const headerStyle = {
 const contentStyle = {
   padding: "16px",
   flex: 1,
-  background: "#eee",
+  background: "#e1e0e5",
   display: "flex",
   flexDirection: "column",
   marginBottom: 64,

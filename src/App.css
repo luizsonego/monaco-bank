@@ -27,7 +27,7 @@ body {
     #052a25 48.75%,
     #050505 94.67%
   ); */
-  background-attachment: fixed;
+  /* background-attachment: fixed; */
 }
 
 .layout-app {
@@ -79,5 +79,83 @@ img {
   }
   to {
     opacity: 0;
+  }
+}
+
+/* ///// */
+
+section {
+  margin: 0 auto;
+  background-color: #f1f1f1;
+}
+section h1 {
+  text-transform: uppercase;
+  font-size: 37px;
+  text-align: center;
+  padding-top: 1em;
+  margin-top: 0px;
+  color: #b79a6c;
+  letter-spacing: 1px;
+}
+section h1 i {
+  font-size: 25px;
+  transform: rotate(30deg);
+  padding: 15px;
+}
+section h1 i:nth-child(1) {
+  transform: rotate(-30deg);
+}
+section .content-scroll-horiz {
+  width: 70%;
+  margin: 0 auto;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+section .content-scroll-horiz::-webkit-scrollbar {
+  height: 7px;
+}
+section .content-scroll-horiz::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+section .content-scroll-horiz::-webkit-scrollbar-thumb:hover {
+  background: #d4d4d4;
+}
+section .content-scroll-horiz::-webkit-scrollbar-track {
+  background: #fff;
+}
+section .content-scroll-horiz ul {
+  display: flex;
+  list-style: none;
+  text-align: left;
+  padding-left: 0px;
+}
+section .content-scroll-horiz ul li {
+  background-color: #fff;
+  min-width: 250px;
+  margin: 10px 5px 25px 5px;
+  display: inline-block;
+  padding: 10px;
+  border: 1px solid #d4d4d4;
+  border-radius: 3px;
+}
+section .content-scroll-horiz ul li a {
+  color: #6e6e6e;
+  text-decoration-line: none;
+  font-size: 23px;
+}
+section .content-scroll-horiz ul li a div.foto {
+  text-align: center;
+}
+section .content-scroll-horiz ul li a div.foto img {
+  max-width: 100%;
+  max-height: 250px;
+}
+section .content-scroll-horiz ul li a h3 {
+  text-align: center;
+}
+@media screen and (max-width: 900px) {
+  section .content-scroll-horiz {
+    width: 100%;
   }
 }

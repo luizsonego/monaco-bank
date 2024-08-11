@@ -3,7 +3,7 @@ import React from "react";
 import { CloseOutline, MoreOutline, SearchOutline } from "antd-mobile-icons";
 import { useLocation, useNavigate } from "react-router-dom";
 // import logo from "../../assets/logo.png";
-import logo from "../../assets/monaco_bank_logo.png";
+import logo from "../../assets/logo_fundo_claro.png";
 
 const right = (
   <div style={{ fontSize: 24 }}>
@@ -27,7 +27,7 @@ const Header = ({ children }) => {
       onBack={() => {
         navigate(-1);
       }}
-      style={{ zIndex: 1, paddingTop: 10 }}
+      style={{ zIndex: 1, paddingTop: 10, background: "#e1e0e5" }}
     >
       <img
         src={logo}
