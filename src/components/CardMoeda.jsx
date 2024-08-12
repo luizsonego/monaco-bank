@@ -1,7 +1,7 @@
 import { Modal } from "antd";
 import React from "react";
 
-const CardMoeda = ({ moeda, simb }) => {
+const CardMoeda = ({ moeda, simb, flag }) => {
   return (
     <div
       style={{
@@ -23,8 +23,13 @@ const CardMoeda = ({ moeda, simb }) => {
               background: "#999",
               marginRight: 10,
               borderRadius: "50%",
+              overflow: "hidden",
+              display: "flex",
+              alignItems: "center",
             }}
-          ></div>
+          >
+            <img src={flag} style={{ height: 40 }} />
+          </div>
           <span style={{ color: "#0a164a", fontSize: 18, fontWeight: 600 }}>
             {moeda}
           </span>

@@ -18,6 +18,8 @@ import { IoIosBarcode } from "react-icons/io";
 import { FaHandHoldingUsd } from "react-icons/fa";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import CardMoeda from "../../components/CardMoeda";
+import usaFlag from "../../assets/usa.png";
+import unFlag from "../../assets/un.png";
 
 const Home = () => {
   const [showAmounts, setShowAmounts] = useState(true);
@@ -110,8 +112,8 @@ const Home = () => {
       </Card>
 
       <Flex>
-        <CardMoeda moeda={"Dolar"} simb={""} />
-        <CardMoeda moeda={"Euro"} simb={""} />
+        <CardMoeda moeda={"Dolar"} simb={""} flag={usaFlag} />
+        <CardMoeda moeda={"Euro"} simb={""} flag={unFlag} />
       </Flex>
 
       <Flex
