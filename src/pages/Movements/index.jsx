@@ -6,16 +6,6 @@ import { date_format } from "../../Helpers/dateFormat";
 import { type_format, type_format_color } from "../../Helpers/typeFormat";
 import { formatCurrency } from "../../Helpers/moneyFormat";
 
-const data = [
-  <Flex justifyContent="space-between" alignItems="center">
-    <span style={{ color: "#555555" }}>20/02/2023</span>
-    <span style={{ color: "#555555" }}>
-      Investimento de $ 1,000,000.00 em 2024-08-10
-    </span>
-    <span style={{ color: "#555555" }}>$ 20.000.00</span>
-  </Flex>,
-];
-
 const Movements = () => {
   const { data: transactionsData, isLoading: loadingTransactions } =
     useTransactionsGet();

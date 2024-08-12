@@ -37,6 +37,9 @@ const CreateUser = () => {
         name="create-user"
         onFinish={onFinish}
       >
+        <Form.Item name="apelido" label="Apelido">
+          <Input />
+        </Form.Item>
         <Form.Item name="name" label="Nome">
           <Input />
         </Form.Item>

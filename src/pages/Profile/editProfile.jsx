@@ -44,12 +44,16 @@ const EditProfile = () => {
         name="create-user"
         onFinish={onFinish}
         initialValues={{
+          name: profileData?.profile.apelido,
           name: profileData?.profile.name,
           email: profileData?.profile.email,
           phone: profileData?.profile.phone,
           whatsapp: profileData?.profile.whatsapp,
         }}
       >
+        <Form.Item name="apelido" label="Apelido">
+          <Input />
+        </Form.Item>
         <Form.Item name="name" label="Nome">
           <Input />
         </Form.Item>

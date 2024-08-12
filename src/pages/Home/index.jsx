@@ -4,19 +4,20 @@ import Header from "../../components/layout/Header";
 import { useTransactionsGet, useWalletGet } from "../../hooks/useWallet.query";
 // import { Card, CardBody } from "@chakra-ui/react";
 import Title from "antd/es/typography/Title";
-import { Card, Divider, Flex, Statistic } from "antd";
+import { Card, Divider, Flex, Modal, Statistic } from "antd";
 import { formatCurrency } from "../../Helpers/moneyFormat";
 import { type_format, type_format_color } from "../../Helpers/typeFormat";
 import { date_format } from "../../Helpers/dateFormat";
 import HeaderProfile from "../../components/layout/HeaderProfile";
 import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
-import { SystemQRcodeOutline } from "antd-mobile-icons";
+import { ExclamationCircleFill, SystemQRcodeOutline } from "antd-mobile-icons";
 import Shortcuts from "../../components/Shortcuts";
 import { useNavigate } from "react-router-dom";
 import { HiArrowsRightLeft } from "react-icons/hi2";
 import { IoIosBarcode } from "react-icons/io";
 import { FaHandHoldingUsd } from "react-icons/fa";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
+import CardMoeda from "../../components/CardMoeda";
 
 const Home = () => {
   const [showAmounts, setShowAmounts] = useState(true);
@@ -32,6 +33,8 @@ const Home = () => {
   const handleNavigate = (path) => {
     navigate(path);
   };
+
+  const handleOpenIndisponible = () => {};
 
   return (
     <>
@@ -106,6 +109,11 @@ const Home = () => {
         </Flex>
       </Card>
 
+      <Flex>
+        <CardMoeda moeda={"Dolar"} simb={""} />
+        <CardMoeda moeda={"Euro"} simb={""} />
+      </Flex>
+
       <Flex
         gap={10}
         wrap="wrap"
@@ -121,14 +129,14 @@ const Home = () => {
           icon={<HiArrowsRightLeft size={30} color="#ceb478" />}
           label={"Transferir"}
         />
-        <Shortcuts
+        {/* <Shortcuts
           icon={<FaHandHoldingUsd size={30} color="#ceb478" />}
           label={"Emprestimos"}
-        />
-        <Shortcuts
+        /> */}
+        {/* <Shortcuts
           icon={<HiOutlineDotsHorizontal size={30} color="#ceb478" />}
           label={"Todos"}
-        />
+        /> */}
       </Flex>
       <Divider />
 

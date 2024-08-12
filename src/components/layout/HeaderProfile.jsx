@@ -29,6 +29,7 @@ const HeaderProfile = ({ color }) => {
             />
           }
           title="Bem vindo"
+          description={profileData?.profile?.account_number}
           extra={
             <Flex gap={8}>
               <QuestionCircleOutline fontSize={22} />
@@ -36,7 +37,7 @@ const HeaderProfile = ({ color }) => {
             </Flex>
           }
         >
-          {profileData?.profile?.name}
+          {profileData?.profile?.aplido || profileData?.profile?.name}
         </List.Item>
       </List>
     </div>
