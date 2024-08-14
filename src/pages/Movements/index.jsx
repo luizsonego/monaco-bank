@@ -43,34 +43,43 @@ const Movements = () => {
       ))} */}
 
       {transactionsData?.map((transaction) => (
-        <Flex
-          gap={10}
-          justifyContent="space-between"
-          justify="space-between"
-          alignItems="center"
-          align="center"
+        <div
           style={{
             marginTop: 10,
-            height: 40,
+            minHeight: 60,
+            height: "auto",
             background: "#f5f5f5",
             paddingLeft: 5,
             paddingRight: 5,
+            paddingBottom: 8,
+            paddingTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
           }}
         >
-          <span style={{ color: "#797777" }}>
-            {date_format(transaction.date)}
-          </span>
-          <span style={{ color: "#797777", width: "80%" }}>
+          <Flex
+            gap={10}
+            justifyContent="space-between"
+            justify="space-between"
+            alignItems="center"
+            align="center"
+          >
+            <span style={{ color: "#797777" }}>
+              {date_format(transaction.date)}
+            </span>
+            <span
+              style={{
+                color: type_format_color(transaction.type_transaction),
+              }}
+            >
+              {formatCurrency(transaction.amount_money, "USD")}
+            </span>
+          </Flex>
+          <span style={{ color: "#797777", width: "100%" }}>
             {transaction.description}
           </span>
-          <span
-            style={{
-              color: type_format_color(transaction.type_transaction),
-            }}
-          >
-            {formatCurrency(transaction.amount_money, "USD")}
-          </span>
-        </Flex>
+        </div>
       ))}
     </div>
   );

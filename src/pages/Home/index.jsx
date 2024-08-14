@@ -40,7 +40,7 @@ const Home = () => {
 
   return (
     <>
-      {/* <div
+      <div
         style={{
           background: "#081331",
           width: "100%",
@@ -50,7 +50,7 @@ const Home = () => {
           top: 0,
           zIndex: 0,
         }}
-      ></div> */}
+      ></div>
       <HeaderProfile />
 
       <Card

@@ -3,7 +3,8 @@ import React from "react";
 import { CloseOutline, MoreOutline, SearchOutline } from "antd-mobile-icons";
 import { useLocation, useNavigate } from "react-router-dom";
 // import logo from "../../assets/logo.png";
-import logo from "../../assets/logo_fundo_claro.png";
+import logoB from "../../assets/logo_fundo_claro.png";
+import logoP from "../../assets/monaco_bank_logo.png";
 
 const right = (
   <div style={{ fontSize: 24 }}>
@@ -27,10 +28,14 @@ const Header = ({ children }) => {
       onBack={() => {
         navigate(-1);
       }}
-      style={{ zIndex: 1, paddingTop: 10, background: "#e1e0e5" }}
+      style={{
+        zIndex: 1,
+        paddingTop: 10,
+        background: pathname !== "/" ? "#e1e0e5" : "#081331",
+      }}
     >
       <img
-        src={logo}
+        src={pathname !== "/" ? logoB : logoP}
         width={80}
         style={{ textAlign: "center", margin: "0px auto" }}
       />
