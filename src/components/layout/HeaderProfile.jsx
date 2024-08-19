@@ -48,7 +48,7 @@ const HeaderProfile = ({ color }) => {
           }
           style={{ color: pathColor }}
         >
-          {profileData?.profile?.aplido || profileData?.profile?.name} NOME
+          {profileData?.profile?.aplido || profileData?.profile?.name}
         </List.Item>
       </List>
     </div>
