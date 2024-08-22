@@ -25,6 +25,7 @@ import AdminEditAddress from "../pages/Admin/upadate/editAddress";
 import AdminEditBank from "../pages/Admin/upadate/editBank";
 import Lancamentos from "../pages/Admin/Lancamentos";
 import Lancamento from "../pages/Admin/Lancamento";
+import Transfer from "../pages/Admin/Transfer";
 
 export default function MainRoutes() {
   const [gifEnded, setGifEnded] = useState(false);
@@ -70,6 +71,7 @@ export default function MainRoutes() {
             { path: "edit-bank/:id", element: <AdminEditBank /> },
             { path: "lancamentos/:id", element: <Lancamentos /> },
             { path: "lancamento/:transactionid", element: <Lancamento /> },
+            { path: "transfer/:id", element: <Transfer /> },
           ],
         },
       ],

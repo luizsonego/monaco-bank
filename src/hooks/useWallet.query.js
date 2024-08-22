@@ -134,6 +134,26 @@ const patchEditTransaction = async (value) => {
     console.log("error: ", error);
   }
 };
+const postCreateTransfer = async (value) => {
+  const { id, values } = value;
+  try {
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API}/v1/profile/transfer?id=${id}`,
+      values,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem(
+            process.env.REACT_APP_ACCESS_TOKEN
+          )}`,
+        },
+      }
+    );
+    return data;
+  } catch (error) {
+    console.log("error: ", error);
+  }
+};
 
 export function useWalletGet() {
   return useQuery({
@@ -162,6 +182,9 @@ export function useAdminTransactionsGet(id) {
   });
 }
 
+export function useTransferPost(data) {
+  return postCreateTransfer(data);
+}
 export function useApportPost(data) {
   return postCreateApport(data);
 }

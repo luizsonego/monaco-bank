@@ -4,7 +4,7 @@ import Header from "../../components/layout/Header";
 import { useTransactionsGet, useWalletGet } from "../../hooks/useWallet.query";
 // import { Card, CardBody } from "@chakra-ui/react";
 import Title from "antd/es/typography/Title";
-import { Card, Divider, Flex, Modal, Statistic } from "antd";
+import { Card, Collapse, Divider, Flex, Modal, Statistic } from "antd";
 import { formatCurrency } from "../../Helpers/moneyFormat";
 import { type_format, type_format_color } from "../../Helpers/typeFormat";
 import { date_format } from "../../Helpers/dateFormat";
@@ -87,16 +87,33 @@ const Home = () => {
         bordered={false}
         style={{ background: "#fff", marginBottom: 15, marginTop: 15 }}
       >
-        <Flex justify={"space-between"}>
-          <Title level={3}>Investimento</Title>
-          expandir
-        </Flex>
+        <Collapse
+          items={[
+            {
+              key: "3",
+              label: <Title level={3}>Investimento</Title>,
+              extra: <Title level={5}>Expandir</Title>,
+              children: (
+                <div>
+                  {showAmounts
+                    ? formatCurrency(walletData?.amount, "USD")
+                    : "*********"}
+                </div>
+              ),
+            },
+          ]}
+          expandIconPosition="right"
+          bordered={false}
+          defaultActiveKey={["1"]}
+        />
+
         <Flex justify={"space-between"} gap={10}>
           <Button
             type="button"
             fill="outline"
             block
             style={{ marginTop: 15, height: 55 }}
+            onClick={() => handleNavigate("investiment")}
           >
             Ver
           </Button>

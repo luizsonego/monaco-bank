@@ -25,6 +25,7 @@ const Description = () => {
           <Box>
             <Heading size="sm">{profileData?.profile.name}</Heading>
             <Text>{profileData?.profile.time_contract}</Text>
+            <Text>{profileData?.profile.account_number}</Text>
           </Box>
         </Flex>
         <IconButton variant="ghost" colorScheme="gray" aria-label="See menu" />
@@ -59,6 +60,13 @@ const Description = () => {
         onClick={() => handleNavigate(`/admin/lancamentos/${id}`)}
       >
         Lançamentos
+      </Button>
+      <Button
+        type="dashed"
+        style={{ margin: "10px 0", display: "block", width: "100%" }}
+        onClick={() => handleNavigate(`/admin/transfer/${id}`)}
+      >
+        Transferencia entre contas
       </Button>
       <Divider />
 

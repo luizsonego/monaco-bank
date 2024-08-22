@@ -20,7 +20,7 @@ const ListProfiles = () => {
             onClick={() => handleNavigate(`/admin/description/${profile.id}`)}
             key={profile.id}
           >
-            {profile.name}
+            {profile.name} - {profile.account_number}
           </List.Item>
         ))}
       </List>
