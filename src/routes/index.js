@@ -26,6 +26,7 @@ import AdminEditBank from "../pages/Admin/upadate/editBank";
 import Lancamentos from "../pages/Admin/Lancamentos";
 import Lancamento from "../pages/Admin/Lancamento";
 import Transfer from "../pages/Admin/Transfer";
+import Complete from "../pages/Complete";
 
 export default function MainRoutes() {
   const [gifEnded, setGifEnded] = useState(false);
@@ -88,6 +89,7 @@ export default function MainRoutes() {
     // { path: "/login", element: <SignIn /> },
     { path: "/recuperar-senha", element: <Forgot /> },
     { path: "/resetar-senha/:token", element: <Reset /> },
+    { path: "register", element: <Complete /> },
     {
       path: "*",
       element: <h1>404</h1>,

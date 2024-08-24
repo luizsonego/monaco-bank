@@ -1,25 +1,109 @@
 import { Box, Flex, Heading, IconButton, Text } from "@chakra-ui/react";
 import { Avatar, List } from "antd-mobile";
-import React from "react";
-import { useProfileGet } from "../../hooks/useProfile.query";
-import { Button, Divider, Empty } from "antd";
+import React, { useRef, useState } from "react";
+import { useProfileGet, useProfilePut } from "../../hooks/useProfile.query";
+import { Button, Divider, Drawer, Empty, notification } from "antd";
 import { EditSOutline } from "antd-mobile-icons";
 import { useNavigate } from "react-router-dom";
+import { IKContext, IKUpload } from "imagekitio-react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const ProfileIndex = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const reftest = useRef(null);
+  const [api, contextHolder] = notification.useNotification();
+  const [progress, setProgress] = useState(0);
+  const [startUpload, setStartUpload] = useState(false);
+  const [uploadSuccess, setUploadSuccess] = useState(false);
+  const [uploadError, setUploadError] = useState(false);
+  const [doc, setDoc] = useState("");
+
+  const publicKey = "public_Hqt+AgHm0gjcWTX7lFzrSP0QwhE=";
+  const urlEndpoint = "https://ik.imagekit.io/qqrtx9mgqo/";
+  // const publicKey = "public_Ma7zOpDkuncNc1ETBTRUSNqSmlE=";
+  // const urlEndpoint = "https://ik.imagekit.io/dl5o3nmut/";
+  const authenticationEndpoint = `${process.env.REACT_APP_API}/v1/site/auth`;
+
   const { data: profileData, isLoading: loadingProfile } = useProfileGet();
+
+  const [open, setOpen] = useState(false);
+
+  const onClose = () => {
+    setOpen(false);
+  };
 
   const handleNavigate = (path) => {
     navigate(path);
+  };
+
+  const handleOpenChangePic = () => {
+    setOpen(true);
+  };
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: useProfilePut,
+    onSuccess: (data) => {
+      if (data.status === 500) {
+        api.error({
+          message: data.message,
+        });
+        return;
+      }
+      api.info({
+        message: data.message,
+      });
+      if (data.status === 201) {
+        setOpen(false);
+        queryClient.invalidateQueries("profile");
+        // navigate("/login");
+      }
+    },
+    onError: (data) => {
+      if (data.status === 500) {
+        api.error({
+          message: data.message,
+        });
+        return;
+      }
+    },
+  });
+
+  const onError = (err) => {
+    console.log("error: ", err);
+    setUploadError(true);
+    setStartUpload(false);
+    api.error({
+      message: "Error",
+      description: err.message,
+    });
+  };
+
+  const onSuccess = (res) => {
+    const values = { profile_pic: res.url };
+    const data = {
+      id: profileData?.profile?.id,
+      values,
+    };
+    api.success({
+      message: "Sucesso",
+      description: "Arquivo enviado com sucesso.",
+    });
+    // setDoc(imageUrl);
+    mutate(data);
+    setStartUpload(false);
   };
 
   return (
     <div>
       <Flex spacing="4">
         <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
-          <Avatar name="Segun Adebayo" src="" />
-
+          <Avatar
+            name=""
+            src={profileData?.profile?.profile_pic || ""}
+            onClick={handleOpenChangePic}
+          />
+          {/* <Button onClick={handleOpenChangePic}>foto</Button> */}
           <Box>
             <Heading size="sm">{profileData?.profile.name}</Heading>
             <Text>{profileData?.profile.time_contract}</Text>
@@ -27,6 +111,29 @@ const ProfileIndex = () => {
         </Flex>
         <IconButton variant="ghost" colorScheme="gray" aria-label="See menu" />
       </Flex>
+
+      <Drawer title="" onClose={onClose} open={open} placement="bottom">
+        <Avatar
+          name=""
+          src={profileData?.profile?.profile_pic || ""}
+          style={{ "--size": "200px" }}
+        />
+        <IKContext
+          publicKey={publicKey}
+          urlEndpoint={urlEndpoint}
+          authenticationEndpoint={authenticationEndpoint}
+        >
+          <IKUpload
+            inputRef={reftest}
+            fileName={profileData?.profile?.name}
+            useUniqueFileName={true}
+            responseFields={["tags"]}
+            folder={"/sample-folder/monaco/picture"}
+            onError={onError}
+            onSuccess={onSuccess}
+          />
+        </IKContext>
+      </Drawer>
 
       <List
         mode="card"
