@@ -1,10 +1,11 @@
-import { Form, Input, notification } from "antd";
-import { Button } from "antd-mobile";
+import { Divider, Form, Input, notification, Progress } from "antd";
+import { Button, ProgressBar } from "antd-mobile";
 import React, { useRef, useState } from "react";
 import { IKImage, IKVideo, IKContext, IKUpload } from "imagekitio-react";
 import { useCreateUserPost } from "../../hooks/useUser.query";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import logo from "../../assets/monaco_bank_logo.png";
 
 const Complete = () => {
   const navigate = useNavigate();
@@ -79,13 +80,27 @@ const Complete = () => {
     };
     mutate(data);
   };
+
+  const onUploadStart = (evt) => {};
+
+  const onUploadProgress = (event) => {
+    const percent = Math.floor((event.loaded / event.total) * 100);
+    setProgress(percent);
+    setUploadSuccess(false);
+    if (percent === 100) {
+      setProgress(0);
+      setUploadSuccess(true);
+    }
+  };
+
   return (
     <div
       style={{
         background: "#081331",
         width: "100%",
-        height: "100vh",
+        // height: "100vh",
         margin: "0 auto",
+        position: "",
       }}
     >
       {contextHolder}{" "}
@@ -96,6 +111,13 @@ const Complete = () => {
           margin: "0 auto",
         }}
       >
+        <div className="logo">
+          <img
+            src={logo}
+            alt=""
+            style={{ height: "150px", margin: "0 auto" }}
+          />
+        </div>
         <Form
           form={form}
           layout="vertical"
@@ -133,6 +155,19 @@ const Complete = () => {
             name="password"
             label={<span style={{ color: "#fff" }}>Senha</span>}
           >
+            <Input.Password />
+          </Form.Item>
+
+          <Form.Item
+            name="number_passport"
+            label={<span style={{ color: "#fff" }}>Número passaporte</span>}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="number_contract"
+            label={<span style={{ color: "#fff" }}>Número contrato</span>}
+          >
             <Input />
           </Form.Item>
 
@@ -142,18 +177,53 @@ const Complete = () => {
               urlEndpoint={urlEndpoint}
               authenticationEndpoint={authenticationEndpoint}
             >
-              <IKUpload
-                inputRef={reftest}
-                fileName={fields}
-                useUniqueFileName={true}
-                responseFields={["tags"]}
-                folder={"/sample-folder/monaco/cadastro"}
-                onError={onError}
-                onSuccess={onSuccess}
-              />
+              <div style={{ position: "relative", display: "block" }}>
+                <label
+                  style={{
+                    display: "block",
+                    padding: "1em 2em",
+                    color: "#fff",
+                    background: "#10a5f5",
+                    borderRadius: "0.25em",
+                    cursor: "pointer",
+                    textAlign: "center",
+                    border: "1px dashed #999",
+                  }}
+                >
+                  Enviar ou tirar foto
+                </label>
+                <IKUpload
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    opacity: 0,
+                    cursor: "pointer",
+                  }}
+                  inputRef={reftest}
+                  fileName={fields}
+                  useUniqueFileName={true}
+                  responseFields={["tags"]}
+                  folder={"/sample-folder/monaco/cadastro"}
+                  onError={onError}
+                  onSuccess={onSuccess}
+                  onUploadStart={onUploadStart}
+                  onUploadProgress={onUploadProgress}
+                />
+              </div>
             </IKContext>
-          </Form.Item>
 
+            {progress > 0 ? (
+              <>
+                {progress}
+                <Progress percent={progress} />
+                {/* <ProgressBar style={{ marginTop: "20px" }} percent={progress} /> */}
+              </>
+            ) : null}
+          </Form.Item>
+          <Divider />
           <Form.Item>
             <Button
               disabled={!enabeSendButton}
