@@ -27,6 +27,8 @@ import Lancamentos from "../pages/Admin/Lancamentos";
 import Lancamento from "../pages/Admin/Lancamento";
 import Transfer from "../pages/Admin/Transfer";
 import Complete from "../pages/Complete";
+import ListNewProfiles from "../pages/Admin/ListNewProfiles";
+import ListDeletedProfiles from "../pages/Admin/ListDeletedProfiles";
 
 export default function MainRoutes() {
   const [gifEnded, setGifEnded] = useState(false);
@@ -64,6 +66,8 @@ export default function MainRoutes() {
             { path: "users", element: <h1>Users</h1> },
             { path: "create-user", element: <CreateUser /> },
             { path: "list-users", element: <ListProfiles /> },
+            { path: "list-new-users", element: <ListNewProfiles /> },
+            { path: "list-deleted-users", element: <ListDeletedProfiles /> },
             { path: "description/:id", element: <Description /> },
             { path: "aporte/:id", element: <Apport /> },
             { path: "saque/:id", element: <Withdraw /> },

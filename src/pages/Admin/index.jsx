@@ -18,6 +18,12 @@ const AdminIndex = () => {
         <List.Item onClick={() => handleNavigate("list-users")}>
           Listar Investidores
         </List.Item>
+        <List.Item onClick={() => handleNavigate("list-new-users")}>
+          Novos Usuários
+        </List.Item>
+        <List.Item onClick={() => handleNavigate("list-deleted-users")}>
+          Usuarios excluidos
+        </List.Item>
       </List>
     </div>
   );

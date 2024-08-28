@@ -1,23 +1,63 @@
 import React from "react";
 import { Box, Flex, Heading, IconButton, Text } from "@chakra-ui/react";
 import { Avatar, List } from "antd-mobile";
-import { Button, Card, Divider, Empty, Statistic } from "antd";
+import { Button, Card, Divider, Empty, notification, Statistic } from "antd";
 import { EditSOutline } from "antd-mobile-icons";
-import { useProfileDescriptionGet } from "../../hooks/useProfile.query";
+import {
+  useProfileActive,
+  useProfileDelete,
+  useProfileDescriptionGet,
+} from "../../hooks/useProfile.query";
 import { useNavigate, useParams } from "react-router-dom";
 import { formatCurrency } from "../../Helpers/moneyFormat";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const Description = () => {
   const navigate = useNavigate();
   let { id } = useParams();
+  const queryClient = useQueryClient();
+  const [api, contextHolder] = notification.useNotification();
   const { data: profileData, isLoading } = useProfileDescriptionGet(id);
 
   const handleNavigate = (path) => {
     navigate(path);
   };
 
+  const { mutate } = useMutation({
+    mutationFn: useProfileActive,
+    onSuccess: (data) => {
+      api.success({
+        message: data.message,
+      });
+      queryClient.invalidateQueries("profile");
+      if (data.status === 201) {
+        navigate(-1);
+      }
+    },
+  });
+  const { mutate: mutateDelete } = useMutation({
+    mutationFn: useProfileDelete,
+    onSuccess: (data) => {
+      api.success({
+        message: data.message,
+      });
+      queryClient.invalidateQueries("profile");
+      if (data.status === 201) {
+        navigate(-1);
+      }
+    },
+  });
+
+  const handleActivate = (data) => {
+    mutate({ id: data });
+  };
+  const handleDelete = (data) => {
+    mutateDelete({ id: data });
+  };
+
   return (
     <div>
+      {contextHolder}
       <Flex spacing="4">
         <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
           <Avatar name="" src="" />
@@ -40,33 +80,79 @@ const Description = () => {
           }}
         />
       </Card>
+      {/* {profileData?.user?.status !== 0 ? (
+        <Button
+          type="dashed"
+          style={{
+            margin: "10px 0",
+            display: "block",
+            width: "100%",
+            background: "#e50000",
+            fontWeight: 700,
+          }}
+          onClick={() => handleDelete(profileData?.profile?.user_id)}
+        >
+          Deletar
+        </Button>
+      ) : (
+        ""
+      )} */}
+      {profileData?.user?.status === 1 ? (
+        <Button
+          type="dashed"
+          style={{ margin: "10px 0", display: "block", width: "100%" }}
+          onClick={() => handleActivate(profileData?.profile?.user_id)}
+        >
+          Ativar
+        </Button>
+      ) : (
+        <>
+          <Button
+            type="dashed"
+            style={{ margin: "10px 0", display: "block", width: "100%" }}
+            onClick={() => handleNavigate(`/admin/aporte/${id}`)}
+          >
+            Realizar aporte
+          </Button>
+          <Button
+            type="dashed"
+            style={{ margin: "10px 0", display: "block", width: "100%" }}
+            onClick={() => handleNavigate(`/admin/saque/${id}`)}
+          >
+            Realizar saque
+          </Button>
+          <Button
+            type="dashed"
+            style={{ margin: "10px 0", display: "block", width: "100%" }}
+            onClick={() => handleNavigate(`/admin/lancamentos/${id}`)}
+          >
+            Lançamentos
+          </Button>
+          <Button
+            type="dashed"
+            style={{
+              margin: "10px 0",
+              display: "block",
+              width: "100%",
+            }}
+            onClick={() => handleNavigate(`/admin/transfer/${id}`)}
+          >
+            Transferencia entre contas
+          </Button>
+        </>
+      )}
       <Button
         type="dashed"
-        style={{ margin: "10px 0", display: "block", width: "100%" }}
-        onClick={() => handleNavigate(`/admin/aporte/${id}`)}
+        style={{
+          margin: "10px 0",
+          display: "block",
+          width: "100%",
+          background: "#e50000",
+          fontWeight: 700,
+        }}
+        onClick={() => handleDelete(profileData?.profile?.user_id)}
       >
-        Realizar aporte
-      </Button>
-      <Button
-        type="dashed"
-        style={{ margin: "10px 0", display: "block", width: "100%" }}
-        onClick={() => handleNavigate(`/admin/saque/${id}`)}
-      >
-        Realizar saque
-      </Button>
-      <Button
-        type="dashed"
-        style={{ margin: "10px 0", display: "block", width: "100%" }}
-        onClick={() => handleNavigate(`/admin/lancamentos/${id}`)}
-      >
-        Lançamentos
-      </Button>
-      <Button
-        type="dashed"
-        style={{ margin: "10px 0", display: "block", width: "100%" }}
-        onClick={() => handleNavigate(`/admin/transfer/${id}`)}
-      >
-        Transferencia entre contas
+        Deletar
       </Button>
       <Divider />
 

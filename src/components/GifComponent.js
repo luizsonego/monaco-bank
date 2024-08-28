@@ -22,7 +22,7 @@ const GifComponent = ({ onGifEnd }) => {
         alignContent: "center",
         justifyContent: "center",
         background: "bisque",
-        backgroundColor: "#fff",
+        backgroundColor: "#fcfcff",
       }}
     >
       <div className={`gif-container ${fadeOut ? "fade-out" : ""}`}>

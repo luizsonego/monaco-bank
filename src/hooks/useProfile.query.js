@@ -57,6 +57,43 @@ const getAllProfiles = async () => {
   }
 };
 
+const getNewProfiles = async () => {
+  try {
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_API}/v1/site/new-users`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem(
+            process.env.REACT_APP_ACCESS_TOKEN
+          )}`,
+        },
+      }
+    );
+    return data.data;
+  } catch (error) {
+    console.log("error: ", error);
+  }
+};
+const getDeletedProfiles = async () => {
+  try {
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_API}/v1/site/user-blocked`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem(
+            process.env.REACT_APP_ACCESS_TOKEN
+          )}`,
+        },
+      }
+    );
+    return data.data;
+  } catch (error) {
+    console.log("error: ", error);
+  }
+};
+
 const getProfilesDescription = async (id) => {
   try {
     const { data } = await axios.get(
@@ -96,6 +133,46 @@ const putProfile = async (data) => {
     console.log("error: ", error);
   }
 };
+const putProfileActive = async (dataUser) => {
+  console.log(dataUser);
+  try {
+    const { data } = await axios.patch(
+      `${process.env.REACT_APP_API}/v1/site/activate-user`,
+      dataUser,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem(
+            process.env.REACT_APP_ACCESS_TOKEN
+          )}`,
+        },
+      }
+    );
+    return data;
+  } catch (error) {
+    console.log("error: ", error);
+  }
+};
+const putProfileDelete = async (dataUser) => {
+  console.log(dataUser);
+  try {
+    const { data } = await axios.patch(
+      `${process.env.REACT_APP_API}/v1/site/delete`,
+      dataUser,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem(
+            process.env.REACT_APP_ACCESS_TOKEN
+          )}`,
+        },
+      }
+    );
+    return data;
+  } catch (error) {
+    console.log("error: ", error);
+  }
+};
 
 export function useProfileGet() {
   return useQuery({
@@ -117,6 +194,19 @@ export function useProfilesGet() {
   });
 }
 
+export function useNewProfilesGet() {
+  return useQuery({
+    queryKey: ["new_profiles"],
+    queryFn: () => getNewProfiles(),
+  });
+}
+export function useDeletedProfilesGet() {
+  return useQuery({
+    queryKey: ["deleted_profiles"],
+    queryFn: () => getDeletedProfiles(),
+  });
+}
+
 export function useProfileDescriptionGet(id) {
   return useQuery({
     queryKey: ["profile-description"],
@@ -126,4 +216,10 @@ export function useProfileDescriptionGet(id) {
 
 export function useProfilePut(data) {
   return putProfile(data);
+}
+export function useProfileActive(data) {
+  return putProfileActive(data);
+}
+export function useProfileDelete(data) {
+  return putProfileDelete(data);
 }
