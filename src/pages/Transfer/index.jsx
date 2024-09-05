@@ -1,56 +1,56 @@
 import { Box, Heading, Text } from "@chakra-ui/react";
-import { Flex, Form, Input, notification, Select } from "antd";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Flex, Form, Input, notification } from "antd";
 import { Button, Card } from "antd-mobile";
 import React from "react";
-import {
-  useProfileDescriptionGet,
-  useProfilesGet,
-} from "../../hooks/useProfile.query";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CurrencyInput from "react-currency-input";
-import { useTransferPost } from "../../hooks/useWallet.query";
-import { useMutation } from "@tanstack/react-query";
+import { useTransferPost } from "../../hooks/useProfile.query";
 
-const Transfer = () => {
+const UserTransfer = () => {
   const [api, contextHolder] = notification.useNotification();
-  const [form] = Form.useForm();
-  let { id } = useParams();
+
   const navigate = useNavigate();
-  const { data, isLoading } = useProfileDescriptionGet(id);
-  const { data: listUsers, isLoading: loadingUser } = useProfilesGet();
-  const { mutate, isPending } = useMutation({
+  const queryClient = useQueryClient();
+  const [form] = Form.useForm();
+
+  // const {} = useTransferGet()
+
+  const { mutate, isLoading, isPending } = useMutation({
     mutationFn: useTransferPost,
-    onSuccess: (data) => {
-      api.info({
+    onSuccess: ({ data, status }) => {
+      api.success({
         message: data.message,
       });
-      if (data.status === 201) {
-        navigate(-1);
+      let encode = btoa([
+        data.id,
+        data.account_number,
+        data.name,
+        data.email,
+        data.amount,
+        data.user,
+      ]);
+      if (status === 200) {
+        navigate(`confirm-transfer/${encode}`);
       }
     },
   });
 
   const onFinish = (values) => {
-    const data = {
-      id: id,
-      values,
-    };
-    mutate(data);
+    mutate(values);
   };
   return (
     <div>
       <Flex spacing="4">
         <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
           <Box>
-            <Heading size="sm">{"Transferencia bancaria"}</Heading>
+            <Heading size="sm">{"Transferência bancaria"}</Heading>
           </Box>
         </Flex>
       </Flex>
 
       <Card bordered={false} style={{ marginTop: 20 }}>
-        <Text align={"center"}>
-          Transferência do usuário: {data?.profile.name}
-        </Text>
+        <Text align={"center"}>Transferência</Text>
         <br />
         <Form
           form={form}
@@ -58,9 +58,12 @@ const Transfer = () => {
           name="create-user"
           onFinish={onFinish}
         >
-          <Form.Item name="amount" label="Valor a ser transferido">
+          <Form.Item name="account_number" label="Numero de conta">
+            <Input />
+          </Form.Item>
+          <Form.Item name="amount" label="Valor">
             <CurrencyInput
-              prefix="$ "
+              // prefix="$ "
               style={{
                 boxSizing: "border-box",
                 margin: 0,
@@ -82,20 +85,10 @@ const Transfer = () => {
               }}
             />
           </Form.Item>
-          <Form.Item name="user_id" label="Para o usuário">
-            <Select
-              // defaultValue="lucy"
-              // style={{ width: 120 }}
-              // onChange={handleChange}
-              options={listUsers?.map((user) => ({
-                value: user.id,
-                label: `${user?.name} - ${user?.account_number}`,
-              }))}
-            />
-          </Form.Item>
+
           <Form.Item>
             <Button
-              loading={!!isPending}
+              loading={!!isLoading || !!isPending}
               style={{ width: "100%", marginRight: 0 }}
               type="submit"
               color="primary"
@@ -109,4 +102,4 @@ const Transfer = () => {
   );
 };
 
-export default Transfer;
+export default UserTransfer;

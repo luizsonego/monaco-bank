@@ -29,6 +29,8 @@ import Transfer from "../pages/Admin/Transfer";
 import Complete from "../pages/Complete";
 import ListNewProfiles from "../pages/Admin/ListNewProfiles";
 import ListDeletedProfiles from "../pages/Admin/ListDeletedProfiles";
+import UserTransfer from "../pages/Transfer";
+import Confirm from "../pages/Transfer/confirm";
 
 export default function MainRoutes() {
   const [gifEnded, setGifEnded] = useState(false);
@@ -59,6 +61,15 @@ export default function MainRoutes() {
             { path: "alterar-senha", element: <ChangePass /> },
           ],
         },
+        {
+          path: "/user-transfer",
+          children: [
+            { path: "", element: <UserTransfer /> },
+            { path: "confirm-transfer/:transfer", element: <Confirm /> },
+          ],
+        },
+        // { path: "/user-transfer", element: <UserTransfer /> },
+
         data === 99 && {
           path: "/admin",
           children: [

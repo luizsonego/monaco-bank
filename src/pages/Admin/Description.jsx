@@ -170,6 +170,7 @@ const Description = () => {
           </div>
         }
       >
+        <List.Item title="Login">{profileData?.user.username}</List.Item>
         <List.Item title="Email">{profileData?.profile.email}</List.Item>
         <List.Item title="Whatsapp">
           {profileData?.profile.whatsapp || "-"}

@@ -113,6 +113,26 @@ const getProfilesDescription = async (id) => {
   }
 };
 
+const getUserTransfer = async (values) => {
+  try {
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API}/v1/movements/transfer`,
+      values,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem(
+            process.env.REACT_APP_ACCESS_TOKEN
+          )}`,
+        },
+      }
+    );
+    return data;
+  } catch (error) {
+    console.log("error: ", error);
+  }
+};
+
 const putProfile = async (data) => {
   const { id, values } = data;
   try {
@@ -214,6 +234,9 @@ export function useProfileDescriptionGet(id) {
   });
 }
 
+export function useTransferPost(data) {
+  return getUserTransfer(data);
+}
 export function useProfilePut(data) {
   return putProfile(data);
 }

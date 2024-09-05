@@ -147,6 +147,7 @@ const Home = () => {
         <Shortcuts
           icon={<HiArrowsRightLeft size={30} color="#ceb478" />}
           label={"Transferir"}
+          path={"user-transfer"}
         />
         {/* <Shortcuts
           icon={<FaHandHoldingUsd size={30} color="#ceb478" />}
