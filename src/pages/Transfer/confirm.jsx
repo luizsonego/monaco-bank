@@ -60,7 +60,6 @@ const Confirm = () => {
       <Title level={5} style={{ textAlign: "center" }}>
         Detalhes da transferência
       </Title>{" "}
-      <br />
       <Card style={{ textAlign: "center" }}>
         <Title level={2}>{formatCurrency(amount, "USD")}</Title>
         <Title level={5} style={{ fontWeight: 400 }}>

@@ -106,14 +106,16 @@ const SignIn = () => {
                 <Input.Password placeholder="Senha" {...field} />
               )}
             />
-            <Button
-              style={buttonStyle}
-              size="xs"
-              htmlType="submit"
-              loading={!!isLoading}
-            >
-              Entrar
-            </Button>
+            {/*
+              <Button
+                style={buttonStyle}
+                size="xs"
+                htmlType="submit"
+                loading={!!isLoading}
+              >
+                Entrar
+              </Button>
+   */}
           </div>
         </form>
         <Button
