@@ -106,7 +106,7 @@ const SignIn = () => {
                 <Input.Password placeholder="Senha" {...field} />
               )}
             />
-            {/*
+            
               <Button
                 style={buttonStyle}
                 size="xs"
@@ -115,7 +115,7 @@ const SignIn = () => {
               >
                 Entrar
               </Button>
-   */}
+  
           </div>
         </form>
         <Button
