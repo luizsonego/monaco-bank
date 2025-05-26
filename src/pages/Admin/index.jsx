@@ -24,6 +24,9 @@ const AdminIndex = () => {
         <List.Item onClick={() => handleNavigate("list-deleted-users")}>
           Usuarios excluidos
         </List.Item>
+        <List.Item onClick={() => handleNavigate("request-movimentation")}>
+          Solicitação de extrato
+        </List.Item>
       </List>
     </div>
   );

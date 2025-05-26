@@ -31,6 +31,9 @@ import ListNewProfiles from "../pages/Admin/ListNewProfiles";
 import ListDeletedProfiles from "../pages/Admin/ListDeletedProfiles";
 import UserTransfer from "../pages/Transfer";
 import Confirm from "../pages/Transfer/confirm";
+import Print from "../pages/Print";
+import RequestMovimentation from "../pages/Admin/RequestMovimentation";
+import ListExtract from "../pages/Print/List";
 
 export default function MainRoutes() {
   const [gifEnded, setGifEnded] = useState(false);
@@ -51,6 +54,8 @@ export default function MainRoutes() {
         },
         { path: "/", element: <Home /> },
         { path: "/investiment", element: <Movements /> },
+        { path: "investiment/list-extract", element: <ListExtract /> },
+        { path: "/print", element: <Print /> },
         {
           path: "/profile",
           children: [
@@ -88,6 +93,7 @@ export default function MainRoutes() {
             { path: "lancamentos/:id", element: <Lancamentos /> },
             { path: "lancamento/:transactionid", element: <Lancamento /> },
             { path: "transfer/:id", element: <Transfer /> },
+            { path: "request-movimentation", element: <RequestMovimentation /> },
           ],
         },
       ],
