@@ -271,6 +271,12 @@ const ProfileIndex = () => {
       <Divider />
 
       <List header="">
+        <List.Item onClick={() => handleNavigate("documentos")}>
+          Documentos
+        </List.Item>
+      </List>
+
+      <List header="">
         <List.Item onClick={() => handleNavigate("alterar-senha")}>
           Alterar senha
         </List.Item>

@@ -34,6 +34,8 @@ import Confirm from "../pages/Transfer/confirm";
 import Print from "../pages/Print";
 import RequestMovimentation from "../pages/Admin/RequestMovimentation";
 import ListExtract from "../pages/Print/List";
+import SendDoc from "../pages/Admin/SendDoc";
+import Doc from "../pages/Profile/Doc";
 
 export default function MainRoutes() {
   const [gifEnded, setGifEnded] = useState(false);
@@ -64,6 +66,7 @@ export default function MainRoutes() {
             { path: "edit-address", element: <EditAddress /> },
             { path: "edit-bank", element: <EditBank /> },
             { path: "alterar-senha", element: <ChangePass /> },
+            { path: "documentos", element: <Doc /> },
           ],
         },
         {
@@ -93,7 +96,7 @@ export default function MainRoutes() {
             { path: "lancamentos/:id", element: <Lancamentos /> },
             { path: "lancamento/:transactionid", element: <Lancamento /> },
             { path: "transfer/:id", element: <Transfer /> },
-            { path: "request-movimentation", element: <RequestMovimentation /> },
+            { path: "enviar-documento", element: <SendDoc /> },
           ],
         },
       ],

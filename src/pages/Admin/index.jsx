@@ -27,6 +27,7 @@ const AdminIndex = () => {
         <List.Item onClick={() => handleNavigate("request-movimentation")}>
           Solicitação de extrato
         </List.Item>
+        <List.Item onClick={() => handleNavigate("enviar-documento")}>Enviar Documento</List.Item>
       </List>
     </div>
   );

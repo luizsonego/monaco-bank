@@ -254,14 +254,14 @@ function Print() {
                     <IKContext
                         publicKey={process.env.REACT_APP_PUBLIC_KEY}
                         urlEndpoint={process.env.REACT_APP_URL_ENDPOINT}
-                        authenticationEndpoint={`${process.env.REACT_APP_API}/${process.env.REACT_AUTH_ENDPOINT}`}
+                        authenticationEndpoint={`${process.env.REACT_APP_API}/${process.env.REACT_APP_AUTH_ENDPOINT}`}
                       >
                         <IKUpload
-                          fileName="selfie.jpg"
+                          fileName={`${formData.name}-${generateUuid()}.jpg`}
                           useUniqueFileName={true}
                           tags={["selfie"]}
                           responseFields={["tags"]}
-                          folder="texte/selfie"
+                          folder="monaco/selfie"
                           onSuccess={onSuccess}
                           onError={onError}
                         />

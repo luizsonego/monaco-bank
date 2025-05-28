@@ -110,6 +110,24 @@ const getTransactionsPrint = async () => {
     console.log("error: ", error);
   }
 };
+const getDoc = async () => {
+  try {
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_API}/v1/envio-doc/view`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem(
+            process.env.REACT_APP_ACCESS_TOKEN
+          )}`,
+        },
+      }
+    );
+    return data.data;
+  } catch (error) {
+    console.log("error: ", error);
+  }
+};
 
 const postCreateApport = async (value) => {
   const { id, values } = value;
@@ -236,6 +254,30 @@ const postRejectRequestMovimentation = async (id) => {
     console.log("error: ", error);
   }
   
+}
+
+const postCreateSendDoc = async (value) => {
+  try {
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API}/v1/envio-doc/create`,
+      value,
+    );
+    return data;
+  }
+  catch (error) {
+    console.log("error: ", error);
+  }
+}
+
+export function useDocGet() {
+  return useQuery({
+    queryKey: ["doc"],
+    queryFn: () => getDoc(),
+  });
+}
+
+export function useCreateSendDoc(data) {
+  return postCreateSendDoc(data);
 }
 
 export function usePrintPost(data) {
