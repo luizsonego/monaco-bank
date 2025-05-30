@@ -97,6 +97,7 @@ export default function MainRoutes() {
             { path: "lancamento/:transactionid", element: <Lancamento /> },
             { path: "transfer/:id", element: <Transfer /> },
             { path: "enviar-documento", element: <SendDoc /> },
+            { path: "request-movimentation", element: <RequestMovimentation /> },
           ],
         },
       ],
