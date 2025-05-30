@@ -145,6 +145,25 @@ function Print() {
     setCallbackResponse(data);
   };
 
+    const authenticator = async () => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API}/v1/site/auth`);
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(
+          `Request failed with status ${response.status}: ${errorText}`
+        );
+      }
+
+      const data = await response.json();
+      const { signature, expire, token } = data;
+      return { signature, expire, token };
+    } catch (error) {
+      throw new Error(`Authentication request failed: ${error.message}`);
+    }
+  };
+
   return (
     <Box
       minH="100vh"
@@ -254,7 +273,7 @@ function Print() {
                     <IKContext
                         publicKey={process.env.REACT_APP_PUBLIC_KEY}
                         urlEndpoint={process.env.REACT_APP_URL_ENDPOINT}
-                        authenticationEndpoint={`${process.env.REACT_APP_API}/${process.env.REACT_APP_AUTH_ENDPOINT}`}
+                        authenticator={authenticator}
                       >
                         <IKUpload
                           fileName={`${formData.name}-${generateUuid()}.jpg`}
