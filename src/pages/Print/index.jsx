@@ -115,7 +115,7 @@ function Print() {
   const handleSubmit = async (e) => {
     const data = {
       ...formData,
-      selfie: callbackResponse.imageUrl,
+      selfie: selfieUrl,
     }
     setIsSubmitting(true);
     try {
@@ -282,7 +282,8 @@ function Print() {
                           responseFields={["tags"]}
                           folder="monaco/selfie"
                           onSuccess={onSuccess}
-                          onError={onError}
+                        onError={onError}
+                        
                         />
                         {selfieUrl && (
                           <Box mt={4}>
