@@ -4,12 +4,12 @@ import React from "react";
 import { useProfileGet } from "../../hooks/useProfile.query";
 import { Flex } from "antd";
 import { MessageOutline, QuestionCircleOutline } from "antd-mobile-icons";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const HeaderProfile = ({ color }) => {
   const location = useLocation();
   const { pathname } = location;
-
+  const navigate = useNavigate();
   const pathColor = pathname !== "/" ? "#081331" : "#e1e0e5";
 
   const { data: profileData, isLoading: loadingProfile } = useProfileGet();
@@ -43,7 +43,7 @@ const HeaderProfile = ({ color }) => {
           extra={
             <Flex gap={8}>
               <QuestionCircleOutline fontSize={22} />
-              <MessageOutline fontSize={22} />
+              <MessageOutline fontSize={22} onClick={() => navigate("/messages")} />
             </Flex>
           }
           style={{ color: pathColor }}

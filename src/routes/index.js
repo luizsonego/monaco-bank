@@ -36,6 +36,8 @@ import RequestMovimentation from "../pages/Admin/RequestMovimentation";
 import ListExtract from "../pages/Print/List";
 import SendDoc from "../pages/Admin/SendDoc";
 import Doc from "../pages/Profile/Doc";
+import Message from "../pages/messages";
+import ViewMessage from "../pages/messages/view";
 
 export default function MainRoutes() {
   const [gifEnded, setGifEnded] = useState(false);
@@ -58,6 +60,8 @@ export default function MainRoutes() {
         { path: "/investiment", element: <Movements /> },
         { path: "investiment/list-extract", element: <ListExtract /> },
         { path: "/print", element: <Print /> },
+        { path: "/messages", element: <Message /> },
+        { path: "/messages/:id", element: <ViewMessage /> },
         {
           path: "/profile",
           children: [
@@ -98,6 +102,7 @@ export default function MainRoutes() {
             { path: "transfer/:id", element: <Transfer /> },
             { path: "enviar-documento", element: <SendDoc /> },
             { path: "request-movimentation", element: <RequestMovimentation /> },
+            { path: "messages", element: <Message /> },
           ],
         },
       ],
