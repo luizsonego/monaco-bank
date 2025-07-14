@@ -152,7 +152,7 @@ const Description = () => {
         }}
         onClick={() => handleDelete(profileData?.profile?.user_id)}
       >
-        Deletar
+        Deletar / Bloquear
       </Button>
       <Divider />
 

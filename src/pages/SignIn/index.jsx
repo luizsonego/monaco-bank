@@ -1,14 +1,15 @@
 import React, { useRef } from "react";
 import { Mutation, useMutation } from "@tanstack/react-query";
-import { Button, Form, Input, Layout } from "antd";
+import { Button, Form, Input, Layout, Modal } from "antd";
 import { Controller, useForm } from "react-hook-form";
 import logo from "../../assets/monaco_bank_logo.png";
 import { background } from "@chakra-ui/react";
 import { useState } from "react";
-import { EyeInvisibleOutline, EyeOutline } from "antd-mobile-icons";
+import { ExclamationCircleFill, EyeInvisibleOutline, EyeOutline } from "antd-mobile-icons";
 import { useLoginPost } from "../../hooks/useUser.query";
 import { Toast } from "antd-mobile";
 import { useNavigate } from "react-router-dom";
+import Message from "./Message";
 
 const { Content } = Layout;
 
@@ -53,8 +54,9 @@ const buttonStyle = {
 
 const SignIn = () => {
   const { handleSubmit, control } = useForm();
+  const [visible, setVisible] = useState(false);
   let navigate = useNavigate();
-
+  const [message, setMessage] = useState([]);
   const handleNavigate = (path) => {
     navigate(path);
   };
@@ -63,10 +65,16 @@ const SignIn = () => {
     mutationFn: useLoginPost,
     onSuccess: (data) => {
       if (data.status === 400 || data.status === 401) {
+
         Toast.show({
           content: data.message,
           icon: "fail",
         });
+
+        setVisible(true);
+        setMessage(data.data);
+        console.log("data: ", data.data);
+
         return;
       }
       Toast.show({
@@ -88,6 +96,20 @@ const SignIn = () => {
 
   return (
     <Layout style={layoutStyle} className={`layout-login`}>
+      {visible && <Message message={message} />}
+      {/* <Modal
+        open={visible}
+        onCancel={() => setVisible(false)}
+        width={'100%'}
+        footer={null}
+      >
+        {
+          message?.map((item, index) => (
+            <p key={index}>{item}</p>
+          ))
+        }
+      </Modal> */}
+
       <Content style={contentStyle}>
         <div className="logo">
           <img src={logo} alt="" style={{ height: "290px" }} />
