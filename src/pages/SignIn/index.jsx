@@ -97,18 +97,7 @@ const SignIn = () => {
   return (
     <Layout style={layoutStyle} className={`layout-login`}>
       {visible && <Message message={message} />}
-      {/* <Modal
-        open={visible}
-        onCancel={() => setVisible(false)}
-        width={'100%'}
-        footer={null}
-      >
-        {
-          message?.map((item, index) => (
-            <p key={index}>{item}</p>
-          ))
-        }
-      </Modal> */}
+
 
       <Content style={contentStyle}>
         <div className="logo">
