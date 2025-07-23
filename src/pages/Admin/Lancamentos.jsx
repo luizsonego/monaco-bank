@@ -7,6 +7,8 @@ import { date_format } from "../../Helpers/dateFormat";
 import { type_format, type_format_color } from "../../Helpers/typeFormat";
 import { formatCurrency } from "../../Helpers/moneyFormat";
 import { ActionSheet } from "antd-mobile";
+import { Box, Heading, Text } from "@chakra-ui/react";
+import { Flex } from "antd";
 
 const Lancamentos = () => {
   const navigate = useNavigate();
@@ -72,13 +74,54 @@ const Lancamentos = () => {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div style={{
+        backgroundColor: '#F0F0F0',
+        background: 'linear-gradient(90deg,rgba(240, 240, 240, 1) 0%, rgba(204, 204, 204, 1) 100%)',
+        minHeight: "100vh",
+        flex: 1,
+        borderRadius: '25px 25px 0 0',
+        paddingTop: 30,
+        paddingLeft: 15,
+        paddingRight: 15,
+        paddingBottom: 100,
+        marginTop: 20,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}>
+        Loading...
+      </div>
+    );
   }
+  
   return (
-    <div>
-      {data?.map((transaction) => (
-        <>
+    <div style={{
+      backgroundColor: '#F0F0F0',
+      background: 'linear-gradient(90deg,rgba(240, 240, 240, 1) 0%, rgba(204, 204, 204, 1) 100%)',
+      minHeight: "100vh",
+      flex: 1,
+      borderRadius: '25px 25px 0 0',
+      paddingTop: 30,
+      paddingLeft: 15,
+      paddingRight: 15,
+      paddingBottom: 100,
+      marginTop: 20,
+    }}>
+      {/* Header Section */}
+      <Flex spacing="4" style={{ marginBottom: 20 }}>
+        <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
+          <Box>
+            <Heading size="sm">Lançamentos</Heading>
+          </Box>
+        </Flex>
+      </Flex>
+
+      {/* Transactions List */}
+      <div>
+        {data?.map((transaction) => (
           <Card
+            key={transaction.id}
             bordered={false}
             loading={isLoading}
             style={{ marginBottom: 10 }}
@@ -119,8 +162,9 @@ const Lancamentos = () => {
               </Button>
             </span>
           </Card>
-        </>
-      ))}
+        ))}
+      </div>
+      
       <Drawer
         title="Editar lançamento"
         destroyOnClose={true}
@@ -137,7 +181,7 @@ const Lancamentos = () => {
             ...dataDrawerEditTransaction,
           }}
         >
-          <Form.Item name="date" label="Data ">
+          <Form.Item name="date" label="Data">
             <Input />
           </Form.Item>
         </Form>

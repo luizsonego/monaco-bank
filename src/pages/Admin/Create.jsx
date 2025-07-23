@@ -29,7 +29,18 @@ const CreateUser = () => {
   };
 
   return (
-    <div>
+    <div style={{
+      backgroundColor: '#F0F0F0',
+      background: 'linear-gradient(90deg,rgba(240, 240, 240, 1) 0%, rgba(204, 204, 204, 1) 100%)',
+      minHeight: "100vh",
+      flex: 1,
+      borderRadius: '25px 25px 0 0',
+      paddingTop: 30,
+      paddingLeft: 15,
+      paddingRight: 15,
+      paddingBottom: 100,
+      marginTop: 20,
+    }}>
       {contextHolder}
       <Form
         form={form}

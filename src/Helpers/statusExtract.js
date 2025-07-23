@@ -14,3 +14,13 @@ export const statusExtractColor = (status) => {
     {statusExtract[status]}
   </Tag>
 };
+
+export const getTypeArrow = (type) => {
+  if (type === 1) {
+    return '↑'; // Seta para cima (investimento)
+  } else if (type === 3) {
+    return '↓'; // Seta para baixo
+  }
+  return ''; // Retorna vazio se não for 1 ou 3
+};
+

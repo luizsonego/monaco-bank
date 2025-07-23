@@ -10,7 +10,7 @@ const HeaderProfile = ({ color }) => {
   const location = useLocation();
   const { pathname } = location;
   const navigate = useNavigate();
-  const pathColor = pathname !== "/" ? "#081331" : "#e1e0e5";
+  const pathColor = pathname !== "/" ? "#081331" : "#081331";
 
   const { data: profileData, isLoading: loadingProfile } = useProfileGet();
 

@@ -31,13 +31,14 @@ const Header = ({ children }) => {
       style={{
         zIndex: 1,
         paddingTop: 10,
-        background: pathname !== "/" ? "#e1e0e5" : "#081331",
+        background: pathname !== "/" ? 'rgba(8, 19, 49, 1)' : 'rgba(8, 19, 49, 1)',
       }}
     >
       <img
-        src={pathname !== "/" ? logoB : logoP}
+        src={pathname !== "/" ? logoP : logoP}
         width={80}
         style={{ textAlign: "center", margin: "0px auto" }}
+        alt="logo"
       />
     </NavBar>
   );

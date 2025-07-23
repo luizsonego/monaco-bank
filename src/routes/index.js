@@ -38,6 +38,9 @@ import SendDoc from "../pages/Admin/SendDoc";
 import Doc from "../pages/Profile/Doc";
 import Message from "../pages/messages";
 import ViewMessage from "../pages/messages/view";
+import Global from "../pages/Global";
+import ContaAberta from "../pages/Global/contaAberta";
+import Mensagens from "../pages/messages/mensagens";
 
 export default function MainRoutes() {
   const [gifEnded, setGifEnded] = useState(false);
@@ -59,9 +62,12 @@ export default function MainRoutes() {
         { path: "/", element: <Home /> },
         { path: "/investiment", element: <Movements /> },
         { path: "investiment/list-extract", element: <ListExtract /> },
+        { path: "/global", element: <Global /> },
+        { path: "/global/conta-aberta", element: <ContaAberta /> },
         { path: "/print", element: <Print /> },
         { path: "/messages", element: <Message /> },
         { path: "/messages/:id", element: <ViewMessage /> },
+        { path: "/messages/message/:id", element: <Mensagens /> },
         {
           path: "/profile",
           children: [

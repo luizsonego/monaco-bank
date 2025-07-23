@@ -37,7 +37,18 @@ const ChangePass = () => {
   };
 
   return (
-    <>
+    <div style={{
+      backgroundColor: '#F0F0F0',
+      background: 'linear-gradient(90deg,rgba(240, 240, 240, 1) 0%, rgba(204, 204, 204, 1) 100%)',
+      minHeight: "100vh",
+      flex: 1,
+      borderRadius: '25px 25px 0 0',
+      paddingTop: 30,
+      paddingLeft: 15,
+      paddingRight: 15,
+    paddingBottom: 100,
+    marginTop: 20,
+    }}>
       {contextHolder}
       <Form
         form={form}
@@ -54,15 +65,23 @@ const ChangePass = () => {
         <Form.Item>
           <Button
             loading={!!isLoading || !!isPending}
-            style={{ width: "100%", marginRight: 0 }}
+            style={{
+              width: "100%", marginRight: 0,
+              color: 'white',
+              background: 'rgba(8, 19, 49, 1) ',
+              border: 'none',
+              borderRadius: '12px',
+              fontSize: '16px',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+            }}
             type="submit"
-            color="primary"
           >
             Salvar
           </Button>
         </Form.Item>
       </Form>
-    </>
+    </div>
   );
 };
 

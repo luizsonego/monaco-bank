@@ -37,21 +37,37 @@ const Transfer = () => {
     };
     mutate(data);
   };
+  
   return (
-    <div>
-      <Flex spacing="4">
+    <div style={{
+      backgroundColor: '#F0F0F0',
+      background: 'linear-gradient(90deg,rgba(240, 240, 240, 1) 0%, rgba(204, 204, 204, 1) 100%)',
+      minHeight: "100vh",
+      flex: 1,
+      borderRadius: '25px 25px 0 0',
+      paddingTop: 30,
+      paddingLeft: 15,
+      paddingRight: 15,
+      paddingBottom: 100,
+      marginTop: 20,
+    }}>
+      {contextHolder}
+      
+      {/* Header Section */}
+      <Flex spacing="4" style={{ marginBottom: 20 }}>
         <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
           <Box>
-            <Heading size="sm">{"Transferencia bancaria"}</Heading>
+            <Heading size="sm">Transferência Bancária</Heading>
           </Box>
         </Flex>
       </Flex>
 
+      {/* Form Card */}
       <Card bordered={false} style={{ marginTop: 20 }}>
-        <Text align={"center"}>
+        <Text align={"center"} style={{ marginBottom: 20 }}>
           Transferência do usuário: {data?.profile.name}
         </Text>
-        <br />
+        
         <Form
           form={form}
           layout="vertical"

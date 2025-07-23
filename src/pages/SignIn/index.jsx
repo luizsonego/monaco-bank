@@ -1,62 +1,25 @@
-import React, { useRef } from "react";
-import { Mutation, useMutation } from "@tanstack/react-query";
-import { Button, Form, Input, Layout, Modal } from "antd";
+import React, { useRef, useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { Button, Form, Input, Layout, Modal, Typography, Divider } from "antd";
 import { Controller, useForm } from "react-hook-form";
 import logo from "../../assets/monaco_bank_logo.png";
-import { background } from "@chakra-ui/react";
-import { useState } from "react";
-import { ExclamationCircleFill, EyeInvisibleOutline, EyeOutline } from "antd-mobile-icons";
+import { EyeInvisibleOutline, EyeOutline, LockOutline, UserOutline } from "antd-mobile-icons";
 import { useLoginPost } from "../../hooks/useUser.query";
 import { Toast } from "antd-mobile";
 import { useNavigate } from "react-router-dom";
 import Message from "./Message";
+import "./styles.css";
 
 const { Content } = Layout;
-
-const contentStyle = {
-  padding: "16px",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  flexDirection: "column",
-  margin: "0 auto",
-};
-
-const layoutStyle = {
-  borderRadius: 8,
-  overflow: "hidden",
-  minHeight: "100vh",
-  display: "flex",
-};
-const formStyle = {
-  width: "300px",
-  display: "flex",
-  flexDirection: "column",
-  gap: "16px",
-  input: {
-    color: "#0e0e0e",
-  },
-};
-const buttonStyle = {
-  backgroundColor: "rgb(11 113 224)",
-  color: "#fff",
-  borderRadius: "0",
-  height: "40px",
-  fontSize: "14px",
-  fontWeight: "bold",
-  borderRadius: "8px",
-  width: "100%",
-  padding: "0 16px",
-  "&:hover": {
-    backgroundColor: "#000",
-  },
-};
+const { Title, Text } = Typography;
 
 const SignIn = () => {
   const { handleSubmit, control } = useForm();
   const [visible, setVisible] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);
   let navigate = useNavigate();
   const [message, setMessage] = useState([]);
+  
   const handleNavigate = (path) => {
     navigate(path);
   };
@@ -65,16 +28,20 @@ const SignIn = () => {
     mutationFn: useLoginPost,
     onSuccess: (data) => {
       if (data.status === 400 || data.status === 401) {
-
         Toast.show({
           content: data.message,
           icon: "fail",
         });
-
         setVisible(true);
         setMessage(data.data);
         console.log("data: ", data.data);
-
+        return;
+      }
+      if (data.status === 404) {
+        Toast.show({
+          content: "Usuário ou senha inválidos",
+          icon: "fail",
+        });
         return;
       }
       Toast.show({
@@ -95,50 +62,116 @@ const SignIn = () => {
   };
 
   return (
-    <Layout style={layoutStyle} className={`layout-login`}>
+    <div className="login-container">
       {visible && <Message message={message} />}
+      
+      {/* Background Pattern */}
+      <div className="background-pattern">
+        <div className="pattern-circle pattern-circle-1"></div>
+        <div className="pattern-circle pattern-circle-2"></div>
+        <div className="pattern-circle pattern-circle-3"></div>
+        <div className="pattern-line pattern-line-1"></div>
+        <div className="pattern-line pattern-line-2"></div>
+      </div>
 
-
-      <Content style={contentStyle}>
-        <div className="logo">
-          <img src={logo} alt="" style={{ height: "290px" }} />
-        </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div style={formStyle}>
-            <Controller
-              name="username"
-              control={control}
-              render={({ field }) => <Input placeholder="Usuário" {...field} />}
-            />
-            <Controller
-              name="password"
-              control={control}
-              render={({ field }) => (
-                <Input.Password placeholder="Senha" {...field} />
-              )}
-            />
-            
-              <Button
-                style={buttonStyle}
-                size="xs"
-                htmlType="submit"
-                loading={!!isLoading}
-              >
-                Entrar
-              </Button>
-  
+      <div className="login-card">
+        {/* Logo Section */}
+        <div className="logo-section">
+          <div className="logo-container">
+            <img src={logo} alt="Monaco Bank" className="logo-image" />
           </div>
-        </form>
-        <Button
-          type="link"
-          style={{ margin: "20px 0 ", color: "#0094a0" }}
-          size="xs"
-          onClick={() => handleNavigate("/recuperar-senha")}
-        >
-          Forgot password
-        </Button>
-      </Content>
-    </Layout>
+          <Title level={2} className="welcome-title">
+            Bem-vindo ao Monaco Bank
+          </Title>
+          <Text className="welcome-subtitle">
+            Acesse sua conta com segurança
+          </Text>
+        </div>
+
+        {/* Form Section */}
+        <div className="form-section">
+          <form onSubmit={handleSubmit(onSubmit)} className="login-form">
+            <div className="input-group">
+              <label className="input-label">Usuário</label>
+              <Controller
+                name="username"
+                control={control}
+                render={({ field }) => (
+                  <div className="input-wrapper">
+                    <UserOutline className="input-icon" />
+                    <Input
+                      {...field}
+                      placeholder="Digite seu usuário"
+                      className="custom-input"
+                      size="large"
+                    />
+                  </div>
+                )}
+              />
+            </div>
+
+            <div className="input-group">
+              <label className="input-label">Senha</label>
+              <Controller
+                name="password"
+                control={control}
+                render={({ field }) => (
+                  <div className="input-wrapper">
+                    <LockOutline className="input-icon" />
+                    <Input.Password
+                      {...field}
+                      placeholder="Digite sua senha"
+                      className="custom-input"
+                      size="large"
+                      visibilityToggle={{
+                        visible: passwordVisible,
+                        onVisibleChange: setPasswordVisible,
+                      }}
+                      iconRender={(visible) =>
+                        visible ? <EyeOutline /> : <EyeInvisibleOutline />
+                      }
+                    />
+                  </div>
+                )}
+              />
+            </div>
+
+            <Button
+              type="primary"
+              htmlType="submit"
+              loading={isLoading}
+              className="login-button"
+              size="large"
+            >
+              {isLoading ? "Entrando..." : "Entrar"}
+            </Button>
+          </form>
+
+          <Divider className="divider">
+            <Text className="divider-text">ou</Text>
+          </Divider>
+
+          <div className="additional-options">
+            <Button
+              type="link"
+              className="forgot-password-link"
+              onClick={() => handleNavigate("/recuperar-senha")}
+            >
+              Esqueceu sua senha?
+            </Button>
+          </div>
+        </div>
+
+        {/* Security Notice */}
+        <div className="security-notice">
+          <div className="security-icon">🔒</div>
+          <Text className="security-text">
+            Suas informações estão protegidas com criptografia de ponta a ponta
+          </Text>
+        </div>
+      </div>
+    </div>
   );
 };
+
 export default SignIn;

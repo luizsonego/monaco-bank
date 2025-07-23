@@ -21,12 +21,22 @@ import { useRoleGet } from "../../hooks/useUser.query";
 const { Footer } = Layout;
 
 const footerStyle = {
-  padding: "15px 0",
+  padding: "8px 0",
   flex: 1,
+  zIndex: 1000,
   position: "fixed",
-  width: "100%",
+  width: "90%",
   bottom: 0,
-  background: "#0c0c0c",
+  backgroundColor: "#D8D8D855",
+  background: "linear-gradient(90deg,rgba(216, 216, 216, 0.7) 42%, rgba(241, 241, 241, 0.7) 100%)",
+  marginBottom: 15,
+  marginTop: 10,
+  backdropFilter: "blur(10px)",
+  marginLeft: "auto",
+  marginRight: "auto",
+  borderRadius: 20,
+  left: '50%',
+  transform: 'translateX(-50%)',
 };
 
 const FooterComponent = ({ children }) => {

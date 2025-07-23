@@ -36,7 +36,17 @@ const EditAddress = () => {
   };
 
   return (
-    <div>
+    <div style={{
+      marginTop: 25,
+      backgroundColor: '#F0F0F0',
+      background: 'linear-gradient(90deg,rgba(240, 240, 240, 1) 0%, rgba(204, 204, 204, 1) 100%)',
+      flex: 1,
+      borderRadius: '25px 25px 0 0',
+      paddingTop: 30,
+      paddingLeft: 15,
+      paddingRight: 15,
+      paddingBottom: 100,
+    }}>
       {contextHolder}
       <Form
         form={form}
@@ -77,9 +87,8 @@ const EditAddress = () => {
         <Form.Item>
           <Button
             loading={!!isLoading}
-            style={{ width: "100%", marginRight: 0 }}
+            style={{ width: "100%", marginRight: 0, backgroundColor: "#1e3a8a", color: "white", border: "none", borderRadius: "12px", fontSize: "16px", fontWeight: "bold", cursor: "pointer", transition: "background-color 0.2s ease" }}
             type="submit"
-            color="primary"
           >
             Salvar
           </Button>

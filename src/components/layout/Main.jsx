@@ -13,21 +13,19 @@ const headerStyle = {
   background: "#000",
   position: "absolute",
   width: "100%",
-  height: 64,
+  height: 300,
   flex: 0,
   zIndex: 100,
 };
 
 const contentStyle = {
-  padding: "16px",
+  backgroundColor: '#081331',
+  background: 'linear-gradient(180deg,rgba(8, 19, 49, 1) 0%, rgba(25, 59, 151, 1) 100%)',
   flex: 1,
-  background: "#e1e0e5",
   display: "flex",
   flexDirection: "column",
-  marginBottom: 64,
 };
 const layoutStyle = {
-  borderRadius: 8,
   overflow: "hidden",
   minHeight: "100vh",
   display: "flex",
