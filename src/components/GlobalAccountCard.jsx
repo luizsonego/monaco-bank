@@ -39,7 +39,7 @@ const GlobalAccountCard = () => {
           opacity: 0.9,
           color: "white"
         }}>
-          Abertura de conta global monaco bank
+          Abertura de conta global Monaco Capital Bank
         </div>
       </div>
       {showGlobalAccount && <GlobalAccount onClose={handleCloseGlobalAccount} />}
