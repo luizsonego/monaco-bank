@@ -1,25 +1,106 @@
 import React from 'react';
 import { NavBar, Button, Space, Toast } from 'antd-mobile';
 import { LeftOutline, CheckCircleFill } from 'antd-mobile-icons';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import logoB from '../../assets/logo_fundo_claro.png';
 import imgCard from "../../assets/card.png";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useProfileUpdateCard } from '../../hooks/useProfile.query';
+import { notification } from 'antd';
 
 function ContaAberta() {
+  const [api, contextHolder] = notification.useNotification();
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const location = useLocation();
+  
+  // Receber dados da moeda selecionada
+  const accountData = location.state?.accountData || {};
 
   const back = () => navigate(-1);
 
+  const { mutate } = useMutation({
+    mutationFn: useProfileUpdateCard,
+    onSuccess: (data) => {
+      api.success({
+        message: data.message,
+      });
+      queryClient.invalidateQueries("profile");
+      if (data.status === 201) {
+        navigate('/');
+      }
+    },
+  });
+  
   const handleRequestCard = () => {
+    // Verificar se temos os dados necessários
+    if (!accountData.id || !accountData.tipo_conta || !accountData.moeda) {
+      Toast.show({
+        content: 'Dados da conta não encontrados. Volte e selecione uma moeda.',
+        position: 'center',
+      });
+      return;
+    }
+
+    // Enviar dados da conta selecionada
+    mutate({
+      id: accountData.id,
+      tipo_conta: accountData.tipo_conta,
+      moeda: accountData.moeda,
+      user_id: accountData.user_id
+    });
     Toast.show({
       content: 'Solicitação de cartão enviada!',
       position: 'center',
+      duration: 2000,
+      style: {
+        backgroundColor: '#081331',
+        color: '#fff',
+        borderRadius: '12px',
+        fontSize: '16px',
+        fontWeight: '600',
+        width: '100%'
+      }
     });
+    
   };
 
   const handleDecideLater = () => {
     navigate(-1);
   };
+
+  // Determinar o título baseado na moeda selecionada
+  const getCardTitle = () => {
+    if (accountData.moeda === 'USD') {
+      return 'Solicite seu Cartão de Débito Global Monaco Visa (Dólar)';
+    } else if (accountData.moeda === 'EUR') {
+      return 'Solicite seu Cartão de Débito Global Monaco Visa (Euro)';
+    }
+    return 'Solicite seu Cartão de Débito Global Monaco Visa';
+  };
+
+  // Determinar o tipo de conta para exibição
+  const getAccountType = () => {
+    if (accountData.tipo_conta === 'global_dollar') {
+      return 'Conta Global Dólar';
+    } else if (accountData.tipo_conta === 'global_euro') {
+      return 'Conta Global Euro';
+    }
+    return 'Conta Global';
+  };
+
+  // Verificar se os dados necessários estão presentes
+  React.useEffect(() => {
+    if (!accountData.id || !accountData.tipo_conta || !accountData.moeda) {
+      Toast.show({
+        content: 'Dados da conta não encontrados. Redirecionando...',
+        position: 'center',
+      });
+      setTimeout(() => {
+        navigate('/global');
+      }, 2000);
+    }
+  }, [accountData, navigate]);
 
   return (
     <div style={{ 
@@ -55,7 +136,7 @@ function ContaAberta() {
             fontSize: '16px', 
             fontWeight: '600' 
           }}>
-            Conta Global aberta
+            {getAccountType()}
           </span>
         </div>
 
@@ -65,7 +146,7 @@ function ContaAberta() {
           padding: '24px',
           marginBottom: '45px',
           position: 'relative',
-          boxShadow: '0 8px 24px rgba(25, 118, 210, 0.3)',
+          boxShadow: '0 8px 24px rgba(0, 6, 12, 0.3)',
           backgroundImage: `url(${imgCard})`,
           backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
@@ -86,7 +167,7 @@ function ContaAberta() {
           marginBottom: '24px',
           marginTop: '20px'
         }}>
-          Solicite seu Cartão de Débito Global Monaco Visa
+          {getCardTitle()}
         </h1>
 
         {/* Seção de Benefícios */}
@@ -97,10 +178,10 @@ function ContaAberta() {
             color: '#333',
             marginBottom: '16px'
           }}>
-            Benefícios com o Cartão Safra Global:
+            Benefícios com o Cartão Monaco Capital Bank:
           </h3>
 
-          {/* Benefício 1 */}
+          {/* Benefício 1 - Específico da moeda */}
           <div style={{
             display: 'flex',
             alignItems: 'flex-start',
@@ -133,14 +214,20 @@ function ContaAberta() {
                 color: '#333',
                 marginBottom: '4px'
               }}>
-                Conversão automática para dólar
+                {accountData.moeda === 'USD' 
+                  ? 'Transações em mais de 150 moedas'
+                  : 'Transações em Euro com conversão automática'
+                }
               </div>
               <div style={{
                 fontSize: '12px',
                 color: '#666',
                 lineHeight: '1.4'
               }}>
-                Pagamentos ou retiradas no mundo todo, com uma taxa de câmbio atrativa.
+                {accountData.moeda === 'USD' 
+                  ? 'Pagamentos ou retiradas no mundo todo, com uma taxa de câmbio atrativa.'
+                  : 'Pagamentos em Euro com conversão automática para outras moedas quando necessário.'
+                }
               </div>
             </div>
           </div>
@@ -182,6 +269,51 @@ function ContaAberta() {
                 lineHeight: '1.4'
               }}>
                 Adicione seu cartão em uma carteira digital segura.
+              </div>
+            </div>
+          </div>
+
+          {/* Benefício 3 - Informações da conta */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'flex-start',
+            gap: '12px',
+            padding: '12px',
+            backgroundColor: 'white',
+            borderRadius: '8px',
+            marginTop: '15px'
+          }}>
+            <div style={{
+              width: '40px',
+              height: '40px',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0
+            }}>
+              <span style={{ 
+                fontSize: '18px', 
+                color: '#4CAF50' 
+              }}>
+                <img width="50" height="50" src="https://img.icons8.com/ios/50/bank-cards.png" alt="bank-cards"/>
+              </span>
+            </div>
+            <div>
+              <div style={{
+                fontSize: '14px',
+                fontWeight: '600',
+                color: '#333',
+                marginBottom: '4px'
+              }}>
+                Conta {accountData.moeda === 'USD' ? 'Dólar' : 'Euro'} ativa
+              </div>
+              <div style={{
+                fontSize: '12px',
+                color: '#666',
+                lineHeight: '1.4'
+              }}>
+                Sua conta global em {accountData.moeda === 'USD' ? 'dólar' : 'euro'} está pronta para uso.
               </div>
             </div>
           </div>

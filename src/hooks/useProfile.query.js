@@ -194,6 +194,26 @@ const putProfileDelete = async (dataUser) => {
   }
 };
 
+const putProfileUpdateCard = async (dataUser) => {
+  try {
+    const { data } = await axios.patch(
+      `${process.env.REACT_APP_API}/v1/profile/update-card`,
+      dataUser,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem(
+            process.env.REACT_APP_ACCESS_TOKEN
+          )}`,
+        },
+      }
+    );
+    return data;
+  } catch (error) {
+    console.log("error: ", error);
+  }
+};
+
 export function useProfileGet() {
   return useQuery({
     queryKey: ["profile"],
@@ -245,4 +265,7 @@ export function useProfileActive(data) {
 }
 export function useProfileDelete(data) {
   return putProfileDelete(data);
+}
+export function useProfileUpdateCard(data) {
+  return putProfileUpdateCard(data);
 }

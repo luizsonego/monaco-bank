@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { NavBar, Button, ActionSheet } from 'antd-mobile';
 import { useNavigate } from 'react-router-dom';
 import Contract from './contract';
+import { useProfileGet } from '../../hooks/useProfile.query';
 
 function Global() {
   const navigate = useNavigate();
   const [selectedCurrency, setSelectedCurrency] = useState('dollar');
   const [showContract, setShowContract] = useState(false);
+  const { data: profileData } = useProfileGet();
 
   const handleBack = () => {
     navigate(-1);
@@ -22,6 +24,23 @@ function Global() {
 
   const handleCloseContract = () => {
     setShowContract(false);
+  };
+
+  const handleAcceptContract = () => {
+    handleCloseContract();
+    
+    // Preparar dados para enviar para a próxima tela
+    const accountData = {
+      id: profileData?.profile?.id,
+      tipo_conta: selectedCurrency === 'dollar' ? 'global_dollar' : 'global_euro',
+      moeda: selectedCurrency === 'dollar' ? 'USD' : 'EUR',
+      user_id: profileData?.profile?.user_id
+    };
+    
+    // Navegar para a tela de conta aberta com os dados
+    navigate('/global/conta-aberta', { 
+      state: { accountData } 
+    });
   };
 
   return (
@@ -290,11 +309,7 @@ function Global() {
                 block
                 color='primary'
                 size='large'
-                onClick={() => {
-                  handleCloseContract();
-                  // Navegar para a tela de conta aberta
-                  navigate('/global/conta-aberta');
-                }}
+                onClick={handleAcceptContract}
                 style={{
                   backgroundColor: '#081331',
                   borderColor: '#081331',

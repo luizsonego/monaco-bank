@@ -132,8 +132,6 @@ function GlobalAccount({ onClose }) {
             justifyContent: "space-between",
             alignItems: "flex-start",
           }}>
-            
-            
 {/* Texto à esquerda */}
             <div style={{
               zIndex: 1001,
@@ -157,7 +155,7 @@ function GlobalAccount({ onClose }) {
                 margin: "0 0 8px 0",
                 lineHeight: "1.2",
               }}>
-                Conta <br /> Global Monaco
+                Conta <br /> Global Monaco Capital Bank
               </h2>
               <p style={{
                 fontSize: "14px",
@@ -180,7 +178,7 @@ function GlobalAccount({ onClose }) {
               alignItems: "center",
               justifyContent: "space-between",
               top: "-70px",
-              right: "30px",
+              right: "15px",
               position: "relative",
               zIndex: 1001,
             }}>
@@ -199,7 +197,7 @@ function GlobalAccount({ onClose }) {
 
           {/* Benefícios */}
           <div style={{
-            top: "-140px",
+            top: "-130px",
             width: '250px',
             position: "relative",
             height: "100px",

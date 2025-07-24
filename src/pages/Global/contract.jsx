@@ -20,7 +20,7 @@ function Contract() {
         <strong>1. OBJETO DO CONTRATO</strong>
       </p>
       <p style={{ marginBottom: '15px' }}>
-        O presente contrato tem por objeto a abertura de conta global no Monaco Bank, 
+        O presente contrato tem por objeto a abertura de conta global no Monaco Capital Bank, 
         permitindo ao cliente realizar transações em múltiplas moedas conforme as 
         condições estabelecidas.
       </p>
@@ -73,7 +73,7 @@ function Contract() {
           margin: 0
         }}>
           <strong>Importante:</strong> Este contrato está sujeito à aprovação do 
-          Monaco Bank e pode ser alterado conforme regulamentações vigentes. 
+          Monaco Capital Bank e pode ser alterado conforme regulamentações vigentes. 
           Para dúvidas, entre em contato com nosso suporte.
         </p>
       </div>
