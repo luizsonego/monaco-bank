@@ -214,6 +214,25 @@ const putProfileUpdateCard = async (dataUser) => {
   }
 };
 
+const getListCardsRequested = async () => {
+  try {
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_API}/v1/profile/list-cards-requested`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem(
+            process.env.REACT_APP_ACCESS_TOKEN
+          )}`,
+        },
+      }
+    );
+    return data.data;
+  } catch (error) {
+    console.log("error: ", error);
+  }
+}
+
 export function useProfileGet() {
   return useQuery({
     queryKey: ["profile"],
@@ -268,4 +287,11 @@ export function useProfileDelete(data) {
 }
 export function useProfileUpdateCard(data) {
   return putProfileUpdateCard(data);
+}
+
+export function useListCardsRequested() {
+  return useQuery({
+    queryKey: ["list_cards_requested"],
+    queryFn: () => getListCardsRequested(),
+  });
 }

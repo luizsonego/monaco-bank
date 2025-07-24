@@ -7,7 +7,8 @@ import {
   UserSwitchOutlined, 
   DeleteOutlined, 
   FileTextOutlined, 
-  SendOutlined 
+  SendOutlined, 
+  CreditCardOutlined
 } from "@ant-design/icons";
 import { Typography } from "antd";
 
@@ -44,6 +45,12 @@ const AdminIndex = () => {
       path: "list-deleted-users",
       icon: <DeleteOutlined style={{ fontSize: "20px", color: "#F44336" }} />,
       description: "Contas removidas do sistema"
+    },
+    {
+      title: "Listar Cartões Solicitados",
+      path: "list-cards-requested",
+      icon: <CreditCardOutlined style={{ fontSize: "20px", color: "#081331" }} />,
+      description: "Gerenciar solicitações de cartões"
     },
     {
       title: "Solicitação de Extrato",

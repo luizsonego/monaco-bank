@@ -41,6 +41,7 @@ import ViewMessage from "../pages/messages/view";
 import Global from "../pages/Global";
 import ContaAberta from "../pages/Global/contaAberta";
 import Mensagens from "../pages/messages/mensagens";
+import CardRequested from "../pages/Admin/CardRequested";
 
 export default function MainRoutes() {
   const [gifEnded, setGifEnded] = useState(false);
@@ -109,6 +110,7 @@ export default function MainRoutes() {
             { path: "enviar-documento", element: <SendDoc /> },
             { path: "request-movimentation", element: <RequestMovimentation /> },
             { path: "messages", element: <Message /> },
+            { path: "list-cards-requested", element: <CardRequested /> },
           ],
         },
       ],
