@@ -45,7 +45,7 @@ const Home = () => {
         {/* Card Conta Global */}
         <div style={{
           marginTop: 10,
-          marginBottom: 10,
+          marginBottom: 100,
         }}>
           <GlobalAccountCard />
         </div>

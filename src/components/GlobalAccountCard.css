@@ -1,0 +1,120 @@
+/* Estilos responsivos para GlobalAccountCard */
+
+@media (max-width: 480px) {
+  .modal-content {
+    padding: 0 16px !important;
+  }
+
+  .header-section {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 12px !important;
+    top: -80px !important;
+  }
+
+  .text-section {
+    flex: 1 1 100% !important;
+    min-width: auto !important;
+    text-align: center !important;
+    align-items: center !important;
+  }
+
+  .phone-section {
+    top: 0px !important;
+    width: 80px !important;
+    height: 150px !important;
+  }
+
+  .benefits-section {
+    top: -80px !important;
+    max-width: 100% !important;
+    text-align: center !important;
+    align-items: center !important;
+  }
+
+  .title-text {
+    font-size: 18px !important;
+  }
+
+  .description-text {
+    font-size: 13px !important;
+  }
+
+  .benefit-text {
+    font-size: 20px !important;
+  }
+
+  .benefit-bold {
+    font-size: 18px !important;
+  }
+
+  .action-button {
+    padding: 14px !important;
+    font-size: 15px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .modal-container {
+    width: 95% !important;
+    max-width: 320px !important;
+  }
+
+  .title-text {
+    font-size: 16px !important;
+  }
+
+  .description-text {
+    font-size: 12px !important;
+  }
+
+  .benefit-text {
+    font-size: 18px !important;
+  }
+
+  .benefit-bold {
+    font-size: 16px !important;
+  }
+
+  .phone-section {
+    width: 70px !important;
+    height: 130px !important;
+  }
+}
+
+@media (max-width: 320px) {
+  .modal-container {
+    width: 98% !important;
+    max-width: 300px !important;
+  }
+
+  .modal-content {
+    padding: 0 12px !important;
+  }
+
+  .title-text {
+    font-size: 15px !important;
+  }
+
+  .description-text {
+    font-size: 11px !important;
+  }
+
+  .benefit-text {
+    font-size: 16px !important;
+  }
+
+  .benefit-bold {
+    font-size: 14px !important;
+  }
+
+  .phone-section {
+    width: 60px !important;
+    height: 110px !important;
+  }
+
+  .action-button {
+    padding: 12px !important;
+    font-size: 14px !important;
+  }
+} 

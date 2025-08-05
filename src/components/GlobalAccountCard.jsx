@@ -5,6 +5,7 @@ import { CloseOutlined } from "@ant-design/icons";
 import imgFamilia from "../assets/familia4.jpg";
 import imgPhone from "../assets/iphone.png";
 import { useNavigate } from "react-router-dom";
+import "./GlobalAccountCard.css";
 
 const GlobalAccountCard = () => {
   const [showGlobalAccount, setShowGlobalAccount] = useState(false);
@@ -51,6 +52,7 @@ export default GlobalAccountCard;
 
 function GlobalAccount({ onClose }) {
   const navigate = useNavigate();
+  
   return (
     <>
       {/* Overlay de fundo */}
@@ -66,20 +68,23 @@ function GlobalAccount({ onClose }) {
       }} onClick={onClose}></div>
 
       {/* Modal */}
-      <div style={{
-        position: "fixed",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        width: "90%",
-        maxWidth: "400px",
-        backgroundColor: "white",
-        borderRadius: "16px",
-        zIndex: 1001,
-        overflow: "hidden",
-        boxShadow: "0 20px 40px rgba(0, 0, 0, 0.3)",
-        paddingBottom: "20px",
-      }}>
+      <div 
+        className="modal-container"
+        style={{
+          position: "fixed",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "90%",
+          maxWidth: "400px",
+          backgroundColor: "white",
+          borderRadius: "16px",
+          zIndex: 1001,
+          overflow: "hidden",
+          boxShadow: "0 20px 40px rgba(0, 0, 0, 0.3)",
+          paddingBottom: "20px",
+        }}
+      >
         
         {/* Imagem da família na praia */}
         <div style={{
@@ -124,64 +129,83 @@ function GlobalAccount({ onClose }) {
         </div>
 
         {/* Conteúdo do modal */}
-        <div style={{ padding: "0 24px" }}>
+        <div 
+          className="modal-content"
+          style={{ padding: "0 24px" }}
+        >
           
           {/* Seção superior com título e mockup do smartphone */}
-          <div style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "flex-start",
-          }}>
-{/* Texto à esquerda */}
-            <div style={{
-              zIndex: 1001,
-              flex: 1,
-              marginRight: "16px",
+          <div 
+            className="header-section"
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "flex-start",
+              gap: "16px",
               position: "relative",
               top: "-100px",
-              maxWidth: '140px',
-              borderTop: "5px solid #1e3a8a",
-              borderBottom: "5px solid #1e3a8a",
-              padding: "10px 0 ",
-              alignItems: "flex-end",
-              justifyContent: "flex-end",
-              display: "flex",
-              flexDirection: "column",
-            }}>
-              <h2 style={{
-                fontSize: "19px",
-                fontWeight: "bold",
-                color: "#1e3a8a",
-                margin: "0 0 8px 0",
-                lineHeight: "1.2",
-              }}>
+              zIndex: 1001,
+              flexWrap: "wrap",
+            }}
+          >
+            {/* Texto à esquerda */}
+            <div 
+              className="text-section"
+              style={{
+                flex: "1 1 200px",
+                minWidth: "140px",
+                borderTop: "5px solid #1e3a8a",
+                borderBottom: "5px solid #1e3a8a",
+                padding: "10px 0",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "flex-end",
+              }}
+            >
+              <h2 
+                className="title-text"
+                style={{
+                  fontSize: "19px",
+                  fontWeight: "bold",
+                  color: "#1e3a8a",
+                  margin: "0 0 8px 0",
+                  lineHeight: "1.2",
+                }}
+              >
                 Conta <br /> Global Monaco Capital Bank
               </h2>
-              <p style={{
-                fontSize: "14px",
-                color: "#374151",
-                margin: 0,
-                lineHeight: "1.4",
-              }}>
+              <p 
+                className="description-text"
+                style={{
+                  fontSize: "14px",
+                  color: "#374151",
+                  margin: 0,
+                  lineHeight: "1.4",
+                }}
+              >
                 Conveniência e segurança para viajar o mundo.
               </p>
             </div>
+            
             {/* Mockup do smartphone à direita */}
-            <div style={{
-              backgroundColor: "transparent",
-              width: "105px",
-              height: "200px",
-              borderRadius: "12px",
-              padding: "8px",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "space-between",
-              top: "-70px",
-              right: "15px",
-              position: "relative",
-              zIndex: 1001,
-            }}>
+            <div 
+              className="phone-section"
+              style={{
+                flex: "0 0 auto",
+                backgroundColor: "transparent",
+                width: "105px",
+                height: "200px",
+                borderRadius: "12px",
+                padding: "8px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "space-between",
+                position: "relative",
+                top: "30px",
+              }}
+            >
               <div
                 style={{
                   backgroundImage: `url(${imgPhone})`,
@@ -192,49 +216,68 @@ function GlobalAccount({ onClose }) {
                 }}
               ></div>
             </div>
-            
           </div>
 
           {/* Benefícios */}
-          <div style={{
-            top: "-130px",
-            width: '250px',
-            position: "relative",
-            height: "100px",
-          }}>
-            <div style={{
-              fontSize: "25px",
-              fontWeight: "normal",
-              color: "#1e3a8a",
-              marginBottom: "8px",
-            }}>
+          <div 
+            className="benefits-section"
+            style={{
+              position: "relative",
+              top: "-130px",
+              width: "100%",
+              maxWidth: "250px",
+              height: "auto",
+              display: "flex",
+              flexDirection: "column",
+              gap: "4px",
+            }}
+          >
+            <div 
+              className="benefit-text"
+              style={{
+                fontSize: "25px",
+                fontWeight: "normal",
+                color: "#1e3a8a",
+                marginBottom: "8px",
+              }}
+            >
               Pague em <br /> qualquer moeda,
             </div>
-            <div style={{
-              fontSize: "22px",
-              fontWeight: "bold",
-              color: "#1e3a8a",
-            }}>
+            <div 
+              className="benefit-bold"
+              style={{
+                fontSize: "22px",
+                fontWeight: "bold",
+                color: "#1e3a8a",
+              }}
+            >
               24 horas por dia,
             </div>
-            <div style={{
-              fontSize: "22px",
-              fontWeight: "bold",
-              color: "#1e3a8a",
-            }}>
+            <div 
+              className="benefit-bold"
+              style={{
+                fontSize: "22px",
+                fontWeight: "bold",
+                color: "#1e3a8a",
+              }}
+            >
               7 dias por semana,
             </div>
-            <div style={{
-              fontSize: "22px",
-              fontWeight: "bold",
-              color: "#1e3a8a",
-            }}>
+            <div 
+              className="benefit-bold"
+              style={{
+                fontSize: "22px",
+                fontWeight: "bold",
+                color: "#1e3a8a",
+              }}
+            >
               com a segurança da Monaco.
             </div>
           </div>
 
           {/* Botão de ação */}
           <button
+            className="action-button"
             onClick={() => {
               // Aqui você pode adicionar a lógica para solicitar a conta
               navigate("/global");
@@ -250,6 +293,7 @@ function GlobalAccount({ onClose }) {
               fontWeight: "bold",
               cursor: "pointer",
               transition: "background-color 0.2s ease",
+              marginTop: "20px",
             }}
             onMouseEnter={(e) => {
               e.target.style.backgroundColor = "#1e40af";
