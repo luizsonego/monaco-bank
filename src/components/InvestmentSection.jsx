@@ -100,7 +100,7 @@ const InvestmentSection = () => {
             children: (
               <div style={contentStyle}>
                 {showAmounts
-                  ? formatCurrency(walletData?.amount || 500000, "USD")
+                  ? formatCurrency(walletData?.amount || 0, "USD")
                   : "*********"}
               </div>
             ),

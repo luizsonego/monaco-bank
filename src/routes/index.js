@@ -117,11 +117,12 @@ export default function MainRoutes() {
     },
     {
       path: "/login",
-      element: !gifEnded ? (
-        <GifComponent onGifEnd={handleGifEnd} />
-      ) : (
-        <SignIn />
-      ),
+      element:
+        !gifEnded ? (
+          <GifComponent onGifEnd={handleGifEnd} />
+        ) : (
+          <SignIn />
+        ),
     },
     // { path: "/login", element: <GifComponent onGifEnd={handleGifEnd} /> },
     // { path: "/login", element: <SignIn /> },

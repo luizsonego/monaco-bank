@@ -1,37 +1,44 @@
 import React, { useState } from "react";
-import cofreGif from "../assets/logoanimada.gif";
+import cofreGif from "../assets/cofre.mp4";
 
 const GifComponent = ({ onGifEnd }) => {
   const [gifLoaded, setGifLoaded] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
 
-  const handleGifLoad = () => {
-    setGifLoaded(true);
-    setTimeout(() => {
-      setFadeOut(true);
-      setTimeout(onGifEnd, 1000); // Time for the fade-out effect
-    }, 6000); // Adjust to the duration of your GIF
+  const handleVideoEnd = () => {
+    setFadeOut(true);
+    setTimeout(onGifEnd, 1000); // Time for the fade-out effect
   };
 
   return (
     <div
       style={{
-        display: "flex",
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100vw",
         height: "100vh",
+        backgroundColor: "#0f172a",
+        zIndex: 9999,
+        display: "flex",
         alignItems: "center",
-        alignContent: "center",
         justifyContent: "center",
-        background: "bisque",
-        backgroundColor: "#fcfcff",
       }}
     >
-      <div className={`gif-container ${fadeOut ? "fade-out" : ""}`}>
-        {!gifLoaded && <div>Loading...</div>}
-        <img
-          src={cofreGif}
+      <div className={`gif-container ${fadeOut ? "fade-out" : ""}`} style={{width: "100%", height: "100%", position: "absolute", top: 0, left: 0}}>
+         {!gifLoaded && ''}
+        <video 
+          src={cofreGif} 
+          autoPlay 
+          muted 
           alt="Loading animation"
-          onLoad={handleGifLoad}
-          style={{ display: gifLoaded ? "block" : "none" }}
+          onEnded={handleVideoEnd}
+          style={{ 
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            display: "block"
+          }}
         />
       </div>
     </div>
