@@ -264,20 +264,6 @@ const Description = () => {
                   }}>
                     {profileData?.profile?.time_contract || "Cliente"}
                   </p>
-                  {/* <div style={{
-                    width: "3px",
-                    height: "3px",
-                    borderRadius: "50%",
-                    background: "rgba(255, 255, 255, 0.5)"
-                  }} /> */}
-                  {/* <p style={{ 
-                    color: "rgba(255, 255, 255, 0.8)", 
-                    margin: 0,
-                    fontSize: "14px",
-                    fontWeight: "500"
-                  }}>
-                    {accountLevel.level}
-                  </p> */}
                 </div>
                 
                 <div style={{
